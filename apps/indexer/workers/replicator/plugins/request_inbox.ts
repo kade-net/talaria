@@ -5,8 +5,6 @@ import * as schema from 'zschema'
 import db, { orm } from "db";
 import { contact, delegate, inbox, phonebook } from "db/schema";
 
-
-
 export class RequestInboxRegisterEventProcessor extends ProcessorPlugin {
     name(): EVENT_NAMES {
         return "RequestInboxRegisterEvent"
@@ -17,7 +15,7 @@ export class RequestInboxRegisterEventProcessor extends ProcessorPlugin {
 
         if (!parsed.success) {
             console.log("Invalid request inbox register event", parsed.error)
-            // TODO: Add appropriate error handling
+            monitor.setFailed(sequence_number, {message: "Invalid request inbox register event", error: parsed.error}); 
             return
         }
 
@@ -34,6 +32,7 @@ export class RequestInboxRegisterEventProcessor extends ProcessorPlugin {
         }
         catch (e) {
             console.log(`Something went wrong ::`, e)
+            monitor.setFailed(sequence_number, {message: "Could Not Insert Request Inbox Event", error: e});
         }
 
     }

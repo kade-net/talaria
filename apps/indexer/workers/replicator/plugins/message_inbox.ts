@@ -17,6 +17,7 @@ export class EnvelopeProcessor implements ProcessorPlugin {
 
         if (!parsed.success) {
             console.log("Invalid envelope", parsed.error)
+            monitor.setFailed(sequence_number, {message: "Invalid Envelope", error: parsed.error});
             return
         }
 
@@ -33,7 +34,7 @@ export class EnvelopeProcessor implements ProcessorPlugin {
 
         }
         catch (e) {
-
+            monitor.setFailed(sequence_number, {message: "Could Not Store Envelope", error: e});
         }
 
     }
