@@ -1,0 +1,76 @@
+syntax = "proto3"
+
+package events;
+
+message RequestInboxRegisterEvent {
+    string user_address = 1;
+    int64 timestamp = 2;
+    int32 hid = 3;
+}
+
+message RequestEvent {
+    string requester_address = 1;
+    string inbox_owner_address = 2;
+    string envelope = 3;
+    int64 timestamp = 4;
+    string inbox_name = 5;
+}
+
+message AcceptRequestEvent {
+    string requester_address = 1;
+    string inbox_owner_address = 2;
+    int64 timestamp = 3;
+    string inbox_name = 4;
+}
+
+message RequestDeniedEvent {
+    string requester_address = 1;
+    string inbox_owner_address = 2;
+    int64 timestamp = 3;
+    string inbox_name = 4;
+}
+
+message RequestRemoveFromPhonebookEvent {
+    string requester_address = 1;
+    string inbox_owner_address = 2;
+    int64 timestamp = 3;
+    string inbox_name = 4;
+}
+
+message DelegateRegisterEvent {
+    string owner = 1;
+    int32 delegate_hid = 2;
+    int32 user_hid = 3;
+    string delegate_address = 4;
+}
+
+message DelegateRemoveEvent {
+    string delegate_address = 1;
+    int32 delegate_hid = 2;
+    string owner_address = 3;
+    int32 owner_hid = 4;
+}
+
+message EventRequest {
+    int64 sequence_number = 1;
+}
+
+message EventsRequest {
+    int64 sequence_number = 1;
+    string event_type = 2;
+}
+
+message Event {
+    string event_type = 1;
+    int64 sequence_number = 2;
+    oneof event {
+        RequestInboxRegisterEvent request_inbox_register_event = 3;
+        RequestEvent request_event = 4;
+        AcceptRequestEvent accept_request_event = 5;
+        RequestDeniedEvent request_denied_event = 6;
+        RequestRemoveFromPhonebookEvent request_remove_from_phonebook_event = 7;
+        DelegateRegisterEvent delegate_register_event = 8;
+        DelegateRemoveEvent delegate_remove_event = 9;
+    }
+}
+
