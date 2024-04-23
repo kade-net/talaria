@@ -3,3 +3,4 @@ node_modules
 *.env.**
 notes
 packages/posthog/dist
+packages/grpc/dist
