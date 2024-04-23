@@ -131,6 +131,9 @@ importers:
       lama:
         specifier: '*'
         version: link:../lama
+      posthog:
+        specifier: '*'
+        version: link:../posthog
     devDependencies:
       '@types/node':
         specifier: ^20.12.7
