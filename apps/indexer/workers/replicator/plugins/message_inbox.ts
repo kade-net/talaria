@@ -23,13 +23,13 @@ export class EnvelopeProcessor implements ProcessorPlugin {
         const data = parsed.data
 
         try {
-            const inbox = await getInbox(data.sender, data.receiver)
-            if (!inbox) {
-                console.log("No inbox found")
-                return
-            }
-
-
+            await db.insert(envelope).values({
+                hid: `${data.hid}`,
+                id: `${data.hid}`,
+                inbox_name: data.inbox_name,
+                ref: data.ref ?? '',
+                timestamp: data.timestamp,
+            })
 
         }
         catch (e) {
