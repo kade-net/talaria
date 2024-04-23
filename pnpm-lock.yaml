@@ -39,6 +39,15 @@ importers:
         specifier: ^5.4.5
         version: 5.4.5
 
+  apps/grpc-server:
+    dependencies:
+      '@kade/grpc':
+        specifier: workspace:^
+        version: link:../../packages/grpc
+      lama:
+        specifier: workspace:*
+        version: link:../../packages/lama
+
   apps/indexer:
     dependencies:
       '@aptos-labs/aptos-protos':
