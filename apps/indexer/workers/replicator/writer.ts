@@ -57,7 +57,7 @@ export class DataProcessor {
                 const event_type = data.type
                 const signature = data.signature
                 const event_data = JSON.parse(data.event)
-                const chosenPlugin = this.registeredPlugins.find(p => p.name() === event_type)
+                const chosenPlugin = this.registeredPlugins.find(p => p.name() === 'LOG')
 
                 if (chosenPlugin) {
                     try {

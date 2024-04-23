@@ -1,3 +1,3 @@
 
 
-export type EVENT_NAMES = 'Envelope' | 'RequestInboxRegisterEvent' | 'RequestEvent' | 'AcceptRequestEvent' | 'RequestDeniedEvent' | 'RequestRemoveFromPhoneBookEvent' | 'DelegateRegisterEvent' | 'DelegateRemoveEvent'
+export type EVENT_NAMES = 'Envelope' | 'RequestInboxRegisterEvent' | 'RequestEvent' | 'AcceptRequestEvent' | 'RequestDeniedEvent' | 'RequestRemoveFromPhoneBookEvent' | 'DelegateRegisterEvent' | 'DelegateRemoveEvent' | "LOG"

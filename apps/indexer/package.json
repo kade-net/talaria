@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "pull": "ts-node --esm ./workers/grpc-worker/main.ts",
+    "replicate": "ts-node --esm ./workers/replicator/main.ts"
   },
   "keywords": [],
   "author": "",
@@ -13,11 +15,13 @@
     "@aptos-labs/aptos-protos": "^1.1.3",
     "@grpc/grpc-js": "^1.10.6",
     "db": "workspace:*",
+    "dotenv": "^16.4.5",
     "lama": "*",
     "lodash": "^4.17.21",
+    "monitor": "*",
+    "node-lmdb": "^0.10.0",
     "timer-node": "^5.0.7",
     "zod": "^3.23.0",
-    "monitor": "*",
     "zschema": "*"
   },
   "devDependencies": {
