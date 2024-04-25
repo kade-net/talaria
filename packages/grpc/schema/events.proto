@@ -2,6 +2,16 @@ syntax = "proto3";
 
 package events;
 
+message Envelope {
+    string sender = 1;
+    string receiver = 2;
+    string content = 3;
+    int64 timestamp = 4;
+    int32 hid = 5;
+    optional string ref = 6;
+    string inbox_name = 7;
+} 
+
 message RequestInboxRegisterEvent {
     string user_address = 1;
     int64 timestamp = 2;
@@ -39,16 +49,16 @@ message RequestRemoveFromPhonebookEvent {
 
 message DelegateRegisterEvent {
     string owner = 1;
-    int32 delegate_hid = 2;
-    int32 user_hid = 3;
+    string delegate_hid = 2;
+    string user_hid = 3;
     string delegate_address = 4;
 }
 
 message DelegateRemoveEvent {
     string delegate_address = 1;
-    int32 delegate_hid = 2;
+    string delegate_hid = 2;
     string owner_address = 3;
-    int32 owner_hid = 4;
+    string owner_hid = 4;
 }
 
 message EventRequest {
@@ -71,6 +81,6 @@ message Event {
         RequestRemoveFromPhonebookEvent request_remove_from_phonebook_event = 7;
         DelegateRegisterEvent delegate_register_event = 8;
         DelegateRemoveEvent delegate_remove_event = 9;
+        Envelope envelope = 10;
     }
 }
-.

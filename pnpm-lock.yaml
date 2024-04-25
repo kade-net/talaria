@@ -44,9 +44,28 @@ importers:
       '@kade/grpc':
         specifier: workspace:^
         version: link:../../packages/grpc
+      indexer:
+        specifier: workspace:*
+        version: link:../indexer
       lama:
         specifier: workspace:*
         version: link:../../packages/lama
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
+      node-lmdb:
+        specifier: ^0.10.0
+        version: 0.10.0
+      zschema:
+        specifier: workspace:*
+        version: link:../../packages/schema
+    devDependencies:
+      '@types/lodash':
+        specifier: ^4.17.0
+        version: 4.17.0
+      ts-node:
+        specifier: ^10.9.2
+        version: 10.9.2(@types/node@20.12.7)(typescript@5.4.5)
 
   apps/indexer:
     dependencies:

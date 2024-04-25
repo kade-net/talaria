@@ -5,6 +5,224 @@
  * git: https://github.com/thesayyn/protoc-gen-ts */
 import * as pb_1 from "google-protobuf";
 export namespace events {
+    export class Envelope extends pb_1.Message {
+        #one_of_decls: number[][] = [[6]];
+        constructor(data?: any[] | ({
+            sender?: string;
+            receiver?: string;
+            content?: string;
+            timestamp?: number;
+            hid?: number;
+            inbox_name?: string;
+        } & (({
+            ref?: string;
+        })))) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("sender" in data && data.sender != undefined) {
+                    this.sender = data.sender;
+                }
+                if ("receiver" in data && data.receiver != undefined) {
+                    this.receiver = data.receiver;
+                }
+                if ("content" in data && data.content != undefined) {
+                    this.content = data.content;
+                }
+                if ("timestamp" in data && data.timestamp != undefined) {
+                    this.timestamp = data.timestamp;
+                }
+                if ("hid" in data && data.hid != undefined) {
+                    this.hid = data.hid;
+                }
+                if ("ref" in data && data.ref != undefined) {
+                    this.ref = data.ref;
+                }
+                if ("inbox_name" in data && data.inbox_name != undefined) {
+                    this.inbox_name = data.inbox_name;
+                }
+            }
+        }
+        get sender() {
+            return pb_1.Message.getFieldWithDefault(this, 1, "") as string;
+        }
+        set sender(value: string) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get receiver() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
+        }
+        set receiver(value: string) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        get content() {
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
+        }
+        set content(value: string) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get timestamp() {
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+        }
+        set timestamp(value: number) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get hid() {
+            return pb_1.Message.getFieldWithDefault(this, 5, 0) as number;
+        }
+        set hid(value: number) {
+            pb_1.Message.setField(this, 5, value);
+        }
+        get ref() {
+            return pb_1.Message.getFieldWithDefault(this, 6, "") as string;
+        }
+        set ref(value: string) {
+            pb_1.Message.setOneofField(this, 6, this.#one_of_decls[0], value);
+        }
+        get has_ref() {
+            return pb_1.Message.getField(this, 6) != null;
+        }
+        get inbox_name() {
+            return pb_1.Message.getFieldWithDefault(this, 7, "") as string;
+        }
+        set inbox_name(value: string) {
+            pb_1.Message.setField(this, 7, value);
+        }
+        get _ref() {
+            const cases: {
+                [index: number]: "none" | "ref";
+            } = {
+                0: "none",
+                6: "ref"
+            };
+            return cases[pb_1.Message.computeOneofCase(this, [6])];
+        }
+        static fromObject(data: {
+            sender?: string;
+            receiver?: string;
+            content?: string;
+            timestamp?: number;
+            hid?: number;
+            ref?: string;
+            inbox_name?: string;
+        }): Envelope {
+            const message = new Envelope({});
+            if (data.sender != null) {
+                message.sender = data.sender;
+            }
+            if (data.receiver != null) {
+                message.receiver = data.receiver;
+            }
+            if (data.content != null) {
+                message.content = data.content;
+            }
+            if (data.timestamp != null) {
+                message.timestamp = data.timestamp;
+            }
+            if (data.hid != null) {
+                message.hid = data.hid;
+            }
+            if (data.ref != null) {
+                message.ref = data.ref;
+            }
+            if (data.inbox_name != null) {
+                message.inbox_name = data.inbox_name;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                sender?: string;
+                receiver?: string;
+                content?: string;
+                timestamp?: number;
+                hid?: number;
+                ref?: string;
+                inbox_name?: string;
+            } = {};
+            if (this.sender != null) {
+                data.sender = this.sender;
+            }
+            if (this.receiver != null) {
+                data.receiver = this.receiver;
+            }
+            if (this.content != null) {
+                data.content = this.content;
+            }
+            if (this.timestamp != null) {
+                data.timestamp = this.timestamp;
+            }
+            if (this.hid != null) {
+                data.hid = this.hid;
+            }
+            if (this.ref != null) {
+                data.ref = this.ref;
+            }
+            if (this.inbox_name != null) {
+                data.inbox_name = this.inbox_name;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.sender.length)
+                writer.writeString(1, this.sender);
+            if (this.receiver.length)
+                writer.writeString(2, this.receiver);
+            if (this.content.length)
+                writer.writeString(3, this.content);
+            if (this.timestamp != 0)
+                writer.writeInt64(4, this.timestamp);
+            if (this.hid != 0)
+                writer.writeInt32(5, this.hid);
+            if (this.has_ref)
+                writer.writeString(6, this.ref);
+            if (this.inbox_name.length)
+                writer.writeString(7, this.inbox_name);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Envelope {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Envelope();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.sender = reader.readString();
+                        break;
+                    case 2:
+                        message.receiver = reader.readString();
+                        break;
+                    case 3:
+                        message.content = reader.readString();
+                        break;
+                    case 4:
+                        message.timestamp = reader.readInt64();
+                        break;
+                    case 5:
+                        message.hid = reader.readInt32();
+                        break;
+                    case 6:
+                        message.ref = reader.readString();
+                        break;
+                    case 7:
+                        message.inbox_name = reader.readString();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): Envelope {
+            return Envelope.deserialize(bytes);
+        }
+    }
     export class RequestInboxRegisterEvent extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
@@ -689,8 +907,8 @@ export namespace events {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             owner?: string;
-            delegate_hid?: number;
-            user_hid?: number;
+            delegate_hid?: string;
+            user_hid?: string;
             delegate_address?: string;
         }) {
             super();
@@ -717,15 +935,15 @@ export namespace events {
             pb_1.Message.setField(this, 1, value);
         }
         get delegate_hid() {
-            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
         }
-        set delegate_hid(value: number) {
+        set delegate_hid(value: string) {
             pb_1.Message.setField(this, 2, value);
         }
         get user_hid() {
-            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
         }
-        set user_hid(value: number) {
+        set user_hid(value: string) {
             pb_1.Message.setField(this, 3, value);
         }
         get delegate_address() {
@@ -736,8 +954,8 @@ export namespace events {
         }
         static fromObject(data: {
             owner?: string;
-            delegate_hid?: number;
-            user_hid?: number;
+            delegate_hid?: string;
+            user_hid?: string;
             delegate_address?: string;
         }): DelegateRegisterEvent {
             const message = new DelegateRegisterEvent({});
@@ -758,8 +976,8 @@ export namespace events {
         toObject() {
             const data: {
                 owner?: string;
-                delegate_hid?: number;
-                user_hid?: number;
+                delegate_hid?: string;
+                user_hid?: string;
                 delegate_address?: string;
             } = {};
             if (this.owner != null) {
@@ -782,10 +1000,10 @@ export namespace events {
             const writer = w || new pb_1.BinaryWriter();
             if (this.owner.length)
                 writer.writeString(1, this.owner);
-            if (this.delegate_hid != 0)
-                writer.writeInt32(2, this.delegate_hid);
-            if (this.user_hid != 0)
-                writer.writeInt32(3, this.user_hid);
+            if (this.delegate_hid.length)
+                writer.writeString(2, this.delegate_hid);
+            if (this.user_hid.length)
+                writer.writeString(3, this.user_hid);
             if (this.delegate_address.length)
                 writer.writeString(4, this.delegate_address);
             if (!w)
@@ -801,10 +1019,10 @@ export namespace events {
                         message.owner = reader.readString();
                         break;
                     case 2:
-                        message.delegate_hid = reader.readInt32();
+                        message.delegate_hid = reader.readString();
                         break;
                     case 3:
-                        message.user_hid = reader.readInt32();
+                        message.user_hid = reader.readString();
                         break;
                     case 4:
                         message.delegate_address = reader.readString();
@@ -825,9 +1043,9 @@ export namespace events {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             delegate_address?: string;
-            delegate_hid?: number;
+            delegate_hid?: string;
             owner_address?: string;
-            owner_hid?: number;
+            owner_hid?: string;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
@@ -853,9 +1071,9 @@ export namespace events {
             pb_1.Message.setField(this, 1, value);
         }
         get delegate_hid() {
-            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
         }
-        set delegate_hid(value: number) {
+        set delegate_hid(value: string) {
             pb_1.Message.setField(this, 2, value);
         }
         get owner_address() {
@@ -865,16 +1083,16 @@ export namespace events {
             pb_1.Message.setField(this, 3, value);
         }
         get owner_hid() {
-            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+            return pb_1.Message.getFieldWithDefault(this, 4, "") as string;
         }
-        set owner_hid(value: number) {
+        set owner_hid(value: string) {
             pb_1.Message.setField(this, 4, value);
         }
         static fromObject(data: {
             delegate_address?: string;
-            delegate_hid?: number;
+            delegate_hid?: string;
             owner_address?: string;
-            owner_hid?: number;
+            owner_hid?: string;
         }): DelegateRemoveEvent {
             const message = new DelegateRemoveEvent({});
             if (data.delegate_address != null) {
@@ -894,9 +1112,9 @@ export namespace events {
         toObject() {
             const data: {
                 delegate_address?: string;
-                delegate_hid?: number;
+                delegate_hid?: string;
                 owner_address?: string;
-                owner_hid?: number;
+                owner_hid?: string;
             } = {};
             if (this.delegate_address != null) {
                 data.delegate_address = this.delegate_address;
@@ -918,12 +1136,12 @@ export namespace events {
             const writer = w || new pb_1.BinaryWriter();
             if (this.delegate_address.length)
                 writer.writeString(1, this.delegate_address);
-            if (this.delegate_hid != 0)
-                writer.writeInt32(2, this.delegate_hid);
+            if (this.delegate_hid.length)
+                writer.writeString(2, this.delegate_hid);
             if (this.owner_address.length)
                 writer.writeString(3, this.owner_address);
-            if (this.owner_hid != 0)
-                writer.writeInt32(4, this.owner_hid);
+            if (this.owner_hid.length)
+                writer.writeString(4, this.owner_hid);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -937,13 +1155,13 @@ export namespace events {
                         message.delegate_address = reader.readString();
                         break;
                     case 2:
-                        message.delegate_hid = reader.readInt32();
+                        message.delegate_hid = reader.readString();
                         break;
                     case 3:
                         message.owner_address = reader.readString();
                         break;
                     case 4:
-                        message.owner_hid = reader.readInt32();
+                        message.owner_hid = reader.readString();
                         break;
                     default: reader.skipField();
                 }
@@ -1115,7 +1333,7 @@ export namespace events {
         }
     }
     export class Event extends pb_1.Message {
-        #one_of_decls: number[][] = [[3, 4, 5, 6, 7, 8, 9]];
+        #one_of_decls: number[][] = [[3, 4, 5, 6, 7, 8, 9, 10]];
         constructor(data?: any[] | ({
             event_type?: string;
             sequence_number?: number;
@@ -1127,6 +1345,7 @@ export namespace events {
             request_remove_from_phonebook_event?: never;
             delegate_register_event?: never;
             delegate_remove_event?: never;
+            envelope?: never;
         } | {
             request_inbox_register_event?: never;
             request_event?: RequestEvent;
@@ -1135,6 +1354,7 @@ export namespace events {
             request_remove_from_phonebook_event?: never;
             delegate_register_event?: never;
             delegate_remove_event?: never;
+            envelope?: never;
         } | {
             request_inbox_register_event?: never;
             request_event?: never;
@@ -1143,6 +1363,7 @@ export namespace events {
             request_remove_from_phonebook_event?: never;
             delegate_register_event?: never;
             delegate_remove_event?: never;
+            envelope?: never;
         } | {
             request_inbox_register_event?: never;
             request_event?: never;
@@ -1151,6 +1372,7 @@ export namespace events {
             request_remove_from_phonebook_event?: never;
             delegate_register_event?: never;
             delegate_remove_event?: never;
+            envelope?: never;
         } | {
             request_inbox_register_event?: never;
             request_event?: never;
@@ -1159,6 +1381,7 @@ export namespace events {
             request_remove_from_phonebook_event?: RequestRemoveFromPhonebookEvent;
             delegate_register_event?: never;
             delegate_remove_event?: never;
+            envelope?: never;
         } | {
             request_inbox_register_event?: never;
             request_event?: never;
@@ -1167,6 +1390,7 @@ export namespace events {
             request_remove_from_phonebook_event?: never;
             delegate_register_event?: DelegateRegisterEvent;
             delegate_remove_event?: never;
+            envelope?: never;
         } | {
             request_inbox_register_event?: never;
             request_event?: never;
@@ -1175,6 +1399,16 @@ export namespace events {
             request_remove_from_phonebook_event?: never;
             delegate_register_event?: never;
             delegate_remove_event?: DelegateRemoveEvent;
+            envelope?: never;
+        } | {
+            request_inbox_register_event?: never;
+            request_event?: never;
+            accept_request_event?: never;
+            request_denied_event?: never;
+            request_remove_from_phonebook_event?: never;
+            delegate_register_event?: never;
+            delegate_remove_event?: never;
+            envelope?: Envelope;
         })))) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
@@ -1205,6 +1439,9 @@ export namespace events {
                 }
                 if ("delegate_remove_event" in data && data.delegate_remove_event != undefined) {
                     this.delegate_remove_event = data.delegate_remove_event;
+                }
+                if ("envelope" in data && data.envelope != undefined) {
+                    this.envelope = data.envelope;
                 }
             }
         }
@@ -1283,9 +1520,18 @@ export namespace events {
         get has_delegate_remove_event() {
             return pb_1.Message.getField(this, 9) != null;
         }
+        get envelope() {
+            return pb_1.Message.getWrapperField(this, Envelope, 10) as Envelope;
+        }
+        set envelope(value: Envelope) {
+            pb_1.Message.setOneofWrapperField(this, 10, this.#one_of_decls[0], value);
+        }
+        get has_envelope() {
+            return pb_1.Message.getField(this, 10) != null;
+        }
         get event() {
             const cases: {
-                [index: number]: "none" | "request_inbox_register_event" | "request_event" | "accept_request_event" | "request_denied_event" | "request_remove_from_phonebook_event" | "delegate_register_event" | "delegate_remove_event";
+                [index: number]: "none" | "request_inbox_register_event" | "request_event" | "accept_request_event" | "request_denied_event" | "request_remove_from_phonebook_event" | "delegate_register_event" | "delegate_remove_event" | "envelope";
             } = {
                 0: "none",
                 3: "request_inbox_register_event",
@@ -1294,9 +1540,10 @@ export namespace events {
                 6: "request_denied_event",
                 7: "request_remove_from_phonebook_event",
                 8: "delegate_register_event",
-                9: "delegate_remove_event"
+                9: "delegate_remove_event",
+                10: "envelope"
             };
-            return cases[pb_1.Message.computeOneofCase(this, [3, 4, 5, 6, 7, 8, 9])];
+            return cases[pb_1.Message.computeOneofCase(this, [3, 4, 5, 6, 7, 8, 9, 10])];
         }
         static fromObject(data: {
             event_type?: string;
@@ -1308,6 +1555,7 @@ export namespace events {
             request_remove_from_phonebook_event?: ReturnType<typeof RequestRemoveFromPhonebookEvent.prototype.toObject>;
             delegate_register_event?: ReturnType<typeof DelegateRegisterEvent.prototype.toObject>;
             delegate_remove_event?: ReturnType<typeof DelegateRemoveEvent.prototype.toObject>;
+            envelope?: ReturnType<typeof Envelope.prototype.toObject>;
         }): Event {
             const message = new Event({});
             if (data.event_type != null) {
@@ -1337,6 +1585,9 @@ export namespace events {
             if (data.delegate_remove_event != null) {
                 message.delegate_remove_event = DelegateRemoveEvent.fromObject(data.delegate_remove_event);
             }
+            if (data.envelope != null) {
+                message.envelope = Envelope.fromObject(data.envelope);
+            }
             return message;
         }
         toObject() {
@@ -1350,6 +1601,7 @@ export namespace events {
                 request_remove_from_phonebook_event?: ReturnType<typeof RequestRemoveFromPhonebookEvent.prototype.toObject>;
                 delegate_register_event?: ReturnType<typeof DelegateRegisterEvent.prototype.toObject>;
                 delegate_remove_event?: ReturnType<typeof DelegateRemoveEvent.prototype.toObject>;
+                envelope?: ReturnType<typeof Envelope.prototype.toObject>;
             } = {};
             if (this.event_type != null) {
                 data.event_type = this.event_type;
@@ -1378,6 +1630,9 @@ export namespace events {
             if (this.delegate_remove_event != null) {
                 data.delegate_remove_event = this.delegate_remove_event.toObject();
             }
+            if (this.envelope != null) {
+                data.envelope = this.envelope.toObject();
+            }
             return data;
         }
         serialize(): Uint8Array;
@@ -1402,6 +1657,8 @@ export namespace events {
                 writer.writeMessage(8, this.delegate_register_event, () => this.delegate_register_event.serialize(writer));
             if (this.has_delegate_remove_event)
                 writer.writeMessage(9, this.delegate_remove_event, () => this.delegate_remove_event.serialize(writer));
+            if (this.has_envelope)
+                writer.writeMessage(10, this.envelope, () => this.envelope.serialize(writer));
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -1437,6 +1694,9 @@ export namespace events {
                         break;
                     case 9:
                         reader.readMessage(message.delegate_remove_event, () => message.delegate_remove_event = DelegateRemoveEvent.deserialize(reader));
+                        break;
+                    case 10:
+                        reader.readMessage(message.envelope, () => message.envelope = Envelope.deserialize(reader));
                         break;
                     default: reader.skipField();
                 }
