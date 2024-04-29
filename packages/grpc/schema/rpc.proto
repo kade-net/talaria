@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+import "events.proto";
+
+service TalariaService {
+    rpc GetTalariaEvent(events.EventRequest) returns (events.Event);
+    rpc GetTalariaEvents(events.EventsRequest) returns (stream events.Event);
+}

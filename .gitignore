@@ -2,3 +2,6 @@ node_modules
 .env
 *.env.**
 notes
+**/dist
+packages/grpc/dist
+setup

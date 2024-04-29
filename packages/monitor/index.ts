@@ -1,4 +1,5 @@
-import { Lama } from "lama/lama"
+import { Lama } from "lama/lama";
+import {capture_event} from "@kade/posthog";
 
 export class ProcessMonitor {
     last_read: Lama
@@ -23,8 +24,9 @@ export class ProcessMonitor {
         return this.last_read.put("last_read", value)
     }
 
-    setFailed(sequence_number: string, payload: string) {
-        return this.failed.put(sequence_number, payload)
+    setFailed(sequence_number: string, payload: Record<any, any>) {
+        this.failed.put(sequence_number, JSON.stringify(payload));
+        capture_event("kade-talaria", "failure", payload);
     }
 
     // setPosthogFailed(sequence_number: string, payload: Record<string, any>) {
