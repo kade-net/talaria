@@ -21,7 +21,7 @@ export class DataProcessor {
         this.monitor = monitor
     }
 
-    async process(_last_read?: number) {
+    async process(_last_read?: number, log?: boolean) {
         console.log("Processing data", _last_read)
         let last_read = "000000000"
 
@@ -57,12 +57,16 @@ export class DataProcessor {
                 const event_type = data.type
                 const signature = data.signature
                 const event_data = JSON.parse(data.event)
-                const chosenPlugin = this.registeredPlugins.find(p => p.name() === 'LOG')
+                const chosenPlugin = this.registeredPlugins.find(p => p.name() === event_type)
+                const logPlugin = this.registeredPlugins.find(p => p.name() === "LOG")
 
                 if (chosenPlugin) {
                     try {
 
                         await chosenPlugin.process(event_data, this.monitor, key, signature)
+                        if (logPlugin) {
+                            await logPlugin.process(event_data, this.monitor, key, signature)
+                        }
                         console.log("Data processed successfully")
                     }
                     catch (e) {
