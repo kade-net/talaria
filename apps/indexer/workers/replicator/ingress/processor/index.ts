@@ -11,7 +11,7 @@ export function sleep(ms: number) {
 export class DataProcessor {
     private dbi: lmdb.Dbi
     private env: lmdb.Env
-    private plugins: IngressPlugin[] = [];
+    private registeredPlugins: IngressPlugin[] = [];
 
     constructor(dbi: lmdb.Dbi, env: lmdb.Env) {
         this.dbi = dbi;
@@ -19,7 +19,7 @@ export class DataProcessor {
     }
 
     registerPlugin(plugin: IngressPlugin) {
-        this.plugins.push(plugin);
+        this.registeredPlugins.push(plugin);
     }
 
     async singleEvent(call: talaria.ServerUnaryCall<events.EventRequest, events.Event>, callback: sendUnaryData<events.Event>) {
@@ -45,7 +45,7 @@ export class DataProcessor {
             const event_data = JSON.parse(data.event)
 
             // Choose plugin to handle data
-            let chosenPlugin = this.plugins.find((p) => p.name === event_type)
+            let chosenPlugin = this.registeredPlugins.find((p) => p.name === event_type)
             if (chosenPlugin === undefined) {
                 callback(new Error(`No plugin found for event :: ${event_type}`), null);
             } else {
@@ -58,7 +58,7 @@ export class DataProcessor {
         }
     }
 
-    async process(call: ServerWritableStream<events.EventsRequest, events.Event>, _last_read?: number) {
+    async process(call: talaria.ServerWritableStream<events.EventsRequest, events.Event>, _last_read?: number) {
         // Getting last read as a string
         console.log("Processing data", _last_read)
         let last_read = "000000000"
@@ -69,10 +69,10 @@ export class DataProcessor {
         console.log("Last read::", last_read)
 
         // Start reading lama from event with last read as key going forward
-        const txn = this.events.env.beginTxn({
+        const txn = this.env.beginTxn({
             readOnly: true
         })
-        const cursor = new lmdb.Cursor(txn, this.events.dbi)
+        const cursor = new lmdb.Cursor(txn, this.dbi)
         const atRange = last_read == "000000000" ? {} : cursor.goToRange(last_read)
         console.log("At Range::", atRange)
         // No more data
@@ -101,11 +101,11 @@ export class DataProcessor {
                 }
                 const signature = data.signature
                 const event_data = JSON.parse(data.event)
-                const chosenPlugin = this.plugins.find(p => p.name() === event_type)
+                const chosenPlugin = this.registeredPlugins.find(p => p.name() === event_type)
 
                 if (chosenPlugin) {
                     try {
-                        await chosenPlugin.processStream(call, event_data, key)
+                        await chosenPlugin.process(call, event_data, key)
                     }
                     catch (e) {
                         console.log("Something went wrong while processing data::", e)

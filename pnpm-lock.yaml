@@ -75,6 +75,9 @@ importers:
       '@grpc/grpc-js':
         specifier: ^1.10.6
         version: 1.10.6
+      '@kade/grpc':
+        specifier: workspace:^
+        version: link:../../packages/grpc
       db:
         specifier: workspace:*
         version: link:../../packages/db
