@@ -1,5 +1,5 @@
 import { Lama } from "lama/lama";
-import {capture_event} from "posthog/src/index";
+import {capture_event} from "@kade/posthog";
 
 export class ProcessMonitor {
     last_read: Lama

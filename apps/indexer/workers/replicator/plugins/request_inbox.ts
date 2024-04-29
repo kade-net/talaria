@@ -48,7 +48,8 @@ export class RequestEventProcessor extends ProcessorPlugin {
         const parsed = schema.request_event.safeParse(event)
 
         if (!parsed.success) {
-            console.log("Unable to parse") // TODO: add appropriate error handling 
+            console.log() // TODO: add appropriate error handling 
+            monitor.setFailed(sequence_number, {message: "Unable to parse request event", error: parsed.error});
             return
         }
 
@@ -79,6 +80,7 @@ export class RequestEventProcessor extends ProcessorPlugin {
         catch (e) {
             // TODO: deal with error
             console.log(`Something wen't wrong::`, e)
+            monitor.setFailed(sequence_number, {message: "Something Went Wroing While Processing Request Event", error: e});
         }
     }
 
@@ -96,6 +98,7 @@ export class AcceptRequestEventProcessor extends ProcessorPlugin {
 
         if (!parsed.success) {
             console.log("SOmething went wrong::", parsed.error) // TODO: some form of error handling
+            monitor.setFailed(sequence_number, {message: "Unable to parse accept request event", error: parsed.error});
             return
         }
 
@@ -116,6 +119,7 @@ export class AcceptRequestEventProcessor extends ProcessorPlugin {
         }
         catch (e) {
             console.log("Something went wrong::", e)
+            monitor.setFailed(sequence_number, {message: "Something Went Wroing While Processing Accept Request Event", error: e});
         }
     }
 
@@ -132,6 +136,7 @@ export class RequestDeniedEventProcessor extends ProcessorPlugin {
 
         if (!parsed.success) {
             console.log("Something went wrong::", parsed.error)
+            monitor.setFailed(sequence_number, {message: "Unable to parse request denied event", error: parsed.error});
             return
         }
 
@@ -153,8 +158,8 @@ export class RequestDeniedEventProcessor extends ProcessorPlugin {
         }
         catch (e) {
             console.log("Something went wrong::", e)
+            monitor.setFailed(sequence_number, {message: "Something Went Wroing While Processing Request Denied Event", error: e});
         }
-
     }
 
 }
@@ -169,6 +174,7 @@ export class RequestRemoveFromPhoneBookEventProcessor extends ProcessorPlugin {
 
         if (!parsed.success) {
             console.log(`Something went wrong::`, parsed.error) // TODO: add extra error handling
+            monitor.setFailed(sequence_number, {message: "Unable to parse request remove from phonebook event", error: parsed.error});
             return
         }
 
@@ -187,11 +193,9 @@ export class RequestRemoveFromPhoneBookEventProcessor extends ProcessorPlugin {
         }
         catch (e) {
             console.log(`Something went wrong::`, e)
+            monitor.setFailed(sequence_number, {message: "Something Went Wroing While Processing Remove From PhoneBook Event", error: e});
         }
-
     }
-
-
 }
 
 export class DelegateRegisterEventProcessor extends ProcessorPlugin {
@@ -204,6 +208,7 @@ export class DelegateRegisterEventProcessor extends ProcessorPlugin {
 
         if (!parsed.success) {
             console.log("Something went wrong::", parsed.error) // TODO: do something
+            monitor.setFailed(sequence_number, {message: "Unable to parse delegeate register event", error: parsed.error});
             return
         }
 
@@ -220,7 +225,7 @@ export class DelegateRegisterEventProcessor extends ProcessorPlugin {
             // TODO: handle this
         }
         catch (e) {
-            // TODO: hadle this 
+            monitor.setFailed(sequence_number, {message: "Something Went Wroing While Processing Delegate Register Event", error: e});
         }
 
     }
@@ -236,6 +241,7 @@ export class DelegateRemoveEventProcessor extends ProcessorPlugin {
 
         if (!parsed.success) {
             console.log("Unable to parse data ::", parsed.error)
+            monitor.setFailed(sequence_number, {message: "Unable to parse delegeate remove event", error: parsed.error});
             return
         }
 
@@ -251,6 +257,7 @@ export class DelegateRemoveEventProcessor extends ProcessorPlugin {
         }
         catch (e) {
             console.log(`Something went wrong::`, e)
+            monitor.setFailed(sequence_number, {message: "Something Went Wroing While Processing Delegate Remove Event", error: e});
         }
     }
 

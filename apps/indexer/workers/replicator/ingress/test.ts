@@ -1,6 +1,6 @@
 import { TalariaServiceClient, credentials, events } from '@kade/grpc'
 
-const client = new TalariaServiceClient('localhost:6000', credentials.createInsecure())
+const client = new TalariaServiceClient('localhost:8089', credentials.createInsecure())
 
 function main() {
     const call = client.GetTalariaEvents(new events.EventsRequest({
