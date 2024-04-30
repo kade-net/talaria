@@ -10,12 +10,15 @@ message Envelope {
     int32 hid = 5;
     optional string ref = 6;
     string inbox_name = 7;
+    string sender_public_key = 8;
+    string receiver_public_key = 9;
 } 
 
 message RequestInboxRegisterEvent {
     string user_address = 1;
     int64 timestamp = 2;
     int32 hid = 3;
+    string public_key = 4;
 }
 
 message RequestEvent {

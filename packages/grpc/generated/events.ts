@@ -14,6 +14,8 @@ export namespace events {
             timestamp?: number;
             hid?: number;
             inbox_name?: string;
+            sender_public_key?: string;
+            receiver_public_key?: string;
         } & (({
             ref?: string;
         })))) {
@@ -40,6 +42,12 @@ export namespace events {
                 }
                 if ("inbox_name" in data && data.inbox_name != undefined) {
                     this.inbox_name = data.inbox_name;
+                }
+                if ("sender_public_key" in data && data.sender_public_key != undefined) {
+                    this.sender_public_key = data.sender_public_key;
+                }
+                if ("receiver_public_key" in data && data.receiver_public_key != undefined) {
+                    this.receiver_public_key = data.receiver_public_key;
                 }
             }
         }
@@ -88,6 +96,18 @@ export namespace events {
         set inbox_name(value: string) {
             pb_1.Message.setField(this, 7, value);
         }
+        get sender_public_key() {
+            return pb_1.Message.getFieldWithDefault(this, 8, "") as string;
+        }
+        set sender_public_key(value: string) {
+            pb_1.Message.setField(this, 8, value);
+        }
+        get receiver_public_key() {
+            return pb_1.Message.getFieldWithDefault(this, 9, "") as string;
+        }
+        set receiver_public_key(value: string) {
+            pb_1.Message.setField(this, 9, value);
+        }
         get _ref() {
             const cases: {
                 [index: number]: "none" | "ref";
@@ -105,6 +125,8 @@ export namespace events {
             hid?: number;
             ref?: string;
             inbox_name?: string;
+            sender_public_key?: string;
+            receiver_public_key?: string;
         }): Envelope {
             const message = new Envelope({});
             if (data.sender != null) {
@@ -128,6 +150,12 @@ export namespace events {
             if (data.inbox_name != null) {
                 message.inbox_name = data.inbox_name;
             }
+            if (data.sender_public_key != null) {
+                message.sender_public_key = data.sender_public_key;
+            }
+            if (data.receiver_public_key != null) {
+                message.receiver_public_key = data.receiver_public_key;
+            }
             return message;
         }
         toObject() {
@@ -139,6 +167,8 @@ export namespace events {
                 hid?: number;
                 ref?: string;
                 inbox_name?: string;
+                sender_public_key?: string;
+                receiver_public_key?: string;
             } = {};
             if (this.sender != null) {
                 data.sender = this.sender;
@@ -161,6 +191,12 @@ export namespace events {
             if (this.inbox_name != null) {
                 data.inbox_name = this.inbox_name;
             }
+            if (this.sender_public_key != null) {
+                data.sender_public_key = this.sender_public_key;
+            }
+            if (this.receiver_public_key != null) {
+                data.receiver_public_key = this.receiver_public_key;
+            }
             return data;
         }
         serialize(): Uint8Array;
@@ -181,6 +217,10 @@ export namespace events {
                 writer.writeString(6, this.ref);
             if (this.inbox_name.length)
                 writer.writeString(7, this.inbox_name);
+            if (this.sender_public_key.length)
+                writer.writeString(8, this.sender_public_key);
+            if (this.receiver_public_key.length)
+                writer.writeString(9, this.receiver_public_key);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -211,6 +251,12 @@ export namespace events {
                     case 7:
                         message.inbox_name = reader.readString();
                         break;
+                    case 8:
+                        message.sender_public_key = reader.readString();
+                        break;
+                    case 9:
+                        message.receiver_public_key = reader.readString();
+                        break;
                     default: reader.skipField();
                 }
             }
@@ -229,6 +275,7 @@ export namespace events {
             user_address?: string;
             timestamp?: number;
             hid?: number;
+            public_key?: string;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
@@ -241,6 +288,9 @@ export namespace events {
                 }
                 if ("hid" in data && data.hid != undefined) {
                     this.hid = data.hid;
+                }
+                if ("public_key" in data && data.public_key != undefined) {
+                    this.public_key = data.public_key;
                 }
             }
         }
@@ -262,10 +312,17 @@ export namespace events {
         set hid(value: number) {
             pb_1.Message.setField(this, 3, value);
         }
+        get public_key() {
+            return pb_1.Message.getFieldWithDefault(this, 4, "") as string;
+        }
+        set public_key(value: string) {
+            pb_1.Message.setField(this, 4, value);
+        }
         static fromObject(data: {
             user_address?: string;
             timestamp?: number;
             hid?: number;
+            public_key?: string;
         }): RequestInboxRegisterEvent {
             const message = new RequestInboxRegisterEvent({});
             if (data.user_address != null) {
@@ -277,6 +334,9 @@ export namespace events {
             if (data.hid != null) {
                 message.hid = data.hid;
             }
+            if (data.public_key != null) {
+                message.public_key = data.public_key;
+            }
             return message;
         }
         toObject() {
@@ -284,6 +344,7 @@ export namespace events {
                 user_address?: string;
                 timestamp?: number;
                 hid?: number;
+                public_key?: string;
             } = {};
             if (this.user_address != null) {
                 data.user_address = this.user_address;
@@ -293,6 +354,9 @@ export namespace events {
             }
             if (this.hid != null) {
                 data.hid = this.hid;
+            }
+            if (this.public_key != null) {
+                data.public_key = this.public_key;
             }
             return data;
         }
@@ -306,6 +370,8 @@ export namespace events {
                 writer.writeInt64(2, this.timestamp);
             if (this.hid != 0)
                 writer.writeInt32(3, this.hid);
+            if (this.public_key.length)
+                writer.writeString(4, this.public_key);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -323,6 +389,9 @@ export namespace events {
                         break;
                     case 3:
                         message.hid = reader.readInt32();
+                        break;
+                    case 4:
+                        message.public_key = reader.readString();
                         break;
                     default: reader.skipField();
                 }

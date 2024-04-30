@@ -47,9 +47,12 @@ importers:
       '@grpc/grpc-js':
         specifier: ^1.10.6
         version: 1.10.6
-      '@kade/grpc':
+      '@kade/hermes-tunnel':
         specifier: workspace:^
         version: link:../../packages/grpc
+      '@kade/posthog':
+        specifier: workspace:^
+        version: link:../../packages/posthog
       db:
         specifier: workspace:*
         version: link:../../packages/db
@@ -166,10 +169,10 @@ importers:
   packages/monitor:
     dependencies:
       '@kade/posthog':
-        specifier: workspace:^
+        specifier: workspace:*
         version: link:../posthog
       lama:
-        specifier: '*'
+        specifier: workspace:*
         version: link:../lama
     devDependencies:
       '@types/node':

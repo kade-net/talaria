@@ -5,7 +5,8 @@ import { boolean, json, pgTable, text, timestamp } from "drizzle-orm/pg-core";
 export const phonebook = pgTable("phonebook", {
     address: text("address").unique().notNull().primaryKey(),
     hid: text("hid").unique().notNull(),
-    timestamp: timestamp("timestamp").notNull()
+    timestamp: timestamp("timestamp").notNull(),
+    public_key: text("public_key")
 })
 
 export type PHONEBOOK = typeof phonebook.$inferSelect

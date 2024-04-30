@@ -1,13 +1,31 @@
 import { Account } from "@aptos-labs/ts-sdk"
 import { aptos, message_inbox_entry_functions, request_inbox_entry_functions } from "../constants"
+import { writeFileSync } from "node:fs"
 
 
 describe('Create 2 inboxes, make conversation requests, send 5 messages back and forth', () => {
     it('all', async () => {
+        const timestamp = Date.now()
+        const file_name = `${timestamp.toString()}.json`
         const alice = Account.generate()
         console.log("Alice's account::", alice.accountAddress.toString())
         const bob = Account.generate()
         console.log("Bob's account::", bob.accountAddress.toString())
+
+        writeFileSync(file_name, JSON.stringify([
+            {
+                name: 'Alice',
+                privateKey: alice.privateKey.toString(),
+                publicKey: alice.publicKey.toString(),
+                address: alice.accountAddress.toString()
+            },
+            {
+                name: 'Bob',
+                privateKey: bob.privateKey.toString(),
+                publicKey: bob.publicKey.toString(),
+                address: bob.accountAddress.toString()
+            }
+        ]), 'utf-8')
 
         await aptos.fundAccount({
             accountAddress: alice.accountAddress,
@@ -23,7 +41,7 @@ describe('Create 2 inboxes, make conversation requests, send 5 messages back and
             sender: alice.accountAddress,
             data: {
                 function: request_inbox_entry_functions.register_request_inbox,
-                functionArguments: []
+                functionArguments: [alice.publicKey.toString()]
             }
         })
 
@@ -37,7 +55,7 @@ describe('Create 2 inboxes, make conversation requests, send 5 messages back and
             sender: bob.accountAddress,
             data: {
                 function: request_inbox_entry_functions.register_request_inbox,
-                functionArguments: []
+                functionArguments: [bob.publicKey.toString()]
             }
         })
 

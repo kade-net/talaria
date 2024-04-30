@@ -32,6 +32,8 @@ export const envelope = pgTable("envelope", {
     timestamp: timestamp("timestamp").notNull(),
     hid: text("hid").notNull(),
     inbox_name: text("inbox_name").notNull().references(() => inbox.id),
+    sender_public_key: text("sender_public_key").notNull(),
+    reciever_pubic_key: text("reciever_public_key").notNull()
 })
 
 export type ENVELOPE = typeof envelope.$inferSelect

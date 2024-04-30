@@ -25,7 +25,8 @@ export class RequestInboxRegisterEventProcessor extends ProcessorPlugin {
             await db.insert(phonebook).values({
                 address: data.user_address,
                 hid: `${data.hid}`,
-                timestamp: data.timestamp
+                timestamp: data.timestamp,
+                public_key: data.public_key
             })
 
             console.log("Request Inbox Register Event processed")

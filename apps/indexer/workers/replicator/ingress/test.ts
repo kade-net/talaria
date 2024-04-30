@@ -1,10 +1,10 @@
-import { TalariaServiceClient, credentials, events } from '@kade/grpc'
+import { TalariaServiceClient, credentials, events } from "@kade/hermes-tunnel"
 
 const client = new TalariaServiceClient('localhost:8089', credentials.createInsecure())
 
 function main() {
     const call = client.GetTalariaEvents(new events.EventsRequest({
-        event_type: "ddd",
+        event_type: "_",
         sequence_number: 0
     }))
 

@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const transformStringToDate = (v: string) => new Date(parseInt(v))
+const transformStringToDate = (v: string) => new Date(parseInt(v) / 1000)
 
 export const envelope = z.object({
     sender: z.string(),
@@ -9,13 +9,16 @@ export const envelope = z.object({
     timestamp: z.string().transform(transformStringToDate),
     hid: z.string().transform(v => parseInt(v)),
     ref: z.string().optional(),
-    inbox_name: z.string()
+    inbox_name: z.string(),
+    sender_public_key: z.string(),
+    receiver_public_key: z.string()
 })
 
 export const request_inbox_register_event = z.object({
     user_address: z.string(),
     timestamp: z.string().transform(transformStringToDate),
     hid: z.string().transform(v => parseInt(v)),
+    public_key: z.string()
 })
 
 export const request_event = z.object({

@@ -16,7 +16,8 @@
   "dependencies": {
     "@aptos-labs/aptos-protos": "^1.1.3",
     "@grpc/grpc-js": "^1.10.6",
-    "@kade/grpc": "workspace:^",
+    "@kade/hermes-tunnel": "workspace:^",
+    "@kade/posthog": "workspace:^",
     "db": "workspace:*",
     "dotenv": "^16.4.5",
     "lama": "*",

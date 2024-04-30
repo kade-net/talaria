@@ -1,4 +1,4 @@
-import talaria, { UnimplementedTalariaServiceService, sendUnaryData, events } from '@kade/grpc';
+import talaria, { UnimplementedTalariaServiceService, sendUnaryData, events } from "@kade/hermes-tunnel";
 import dataprocessor from './setup';
 
 class TalariaSever implements UnimplementedTalariaServiceService {

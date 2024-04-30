@@ -1,4 +1,4 @@
-import { ServerWritableStream, events, sendUnaryData } from "@kade/grpc";
+import { ServerWritableStream, events, sendUnaryData } from "@kade/hermes-tunnel";
 import { EVENT_NAMES } from "../../../../types";
 import { IngressPlugin } from "./definitions";
 import { envelope } from "zschema";
@@ -26,7 +26,9 @@ export class EnvelopePlugin implements IngressPlugin {
                     timestamp: parsed_data.timestamp.getTime(),
                     hid: parsed_data.hid,
                     ref: parsed_data.ref,
-                    inbox_name: parsed_data.inbox_name
+                    inbox_name: parsed_data.inbox_name,
+                    receiver_public_key: parsed_data.receiver_public_key,
+                    sender_public_key: parsed_data.sender_public_key
                 })
             });
         } catch(err) {

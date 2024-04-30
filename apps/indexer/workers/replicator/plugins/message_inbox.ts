@@ -30,6 +30,8 @@ export class EnvelopeProcessor implements ProcessorPlugin {
                 inbox_name: data.inbox_name,
                 ref: data.ref ?? '',
                 timestamp: data.timestamp,
+                reciever_pubic_key: data.receiver_public_key,
+                sender_public_key: data.sender_public_key
             })
 
         }

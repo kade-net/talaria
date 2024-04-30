@@ -1,4 +1,4 @@
-import { ServerWritableStream, events, sendUnaryData } from "@kade/grpc";
+import { ServerWritableStream, events, sendUnaryData } from "@kade/hermes-tunnel";
 import { EVENT_NAMES } from "../../../../types";
 import { IngressPlugin } from "./definitions";
 import { accept_request_event, request_event, request_inbox_register_event } from "zschema";
@@ -22,7 +22,8 @@ export class RequestInboxRegisterEventPlugin implements IngressPlugin {
                 request_inbox_register_event: new events.RequestInboxRegisterEvent({
                     user_address: parsed_data.user_address,
                     timestamp: parsed_data.timestamp.getTime(),
-                    hid: parsed_data.hid
+                    hid: parsed_data.hid,
+                    public_key: parsed_data.public_key
                 })
             });
         } catch(err) {

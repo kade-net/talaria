@@ -302,7 +302,9 @@ proto.events.Envelope.toObject = function(includeInstance, msg) {
     timestamp: jspb.Message.getFieldWithDefault(msg, 4, 0),
     hid: jspb.Message.getFieldWithDefault(msg, 5, 0),
     ref: jspb.Message.getFieldWithDefault(msg, 6, ""),
-    inboxName: jspb.Message.getFieldWithDefault(msg, 7, "")
+    inboxName: jspb.Message.getFieldWithDefault(msg, 7, ""),
+    senderPublicKey: jspb.Message.getFieldWithDefault(msg, 8, ""),
+    receiverPublicKey: jspb.Message.getFieldWithDefault(msg, 9, "")
   };
 
   if (includeInstance) {
@@ -366,6 +368,14 @@ proto.events.Envelope.deserializeBinaryFromReader = function(msg, reader) {
     case 7:
       var value = /** @type {string} */ (reader.readString());
       msg.setInboxName(value);
+      break;
+    case 8:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setSenderPublicKey(value);
+      break;
+    case 9:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setReceiverPublicKey(value);
       break;
     default:
       reader.skipField();
@@ -442,6 +452,20 @@ proto.events.Envelope.serializeBinaryToWriter = function(message, writer) {
   if (f.length > 0) {
     writer.writeString(
       7,
+      f
+    );
+  }
+  f = message.getSenderPublicKey();
+  if (f.length > 0) {
+    writer.writeString(
+      8,
+      f
+    );
+  }
+  f = message.getReceiverPublicKey();
+  if (f.length > 0) {
+    writer.writeString(
+      9,
       f
     );
   }
@@ -592,6 +616,42 @@ proto.events.Envelope.prototype.setInboxName = function(value) {
 };
 
 
+/**
+ * optional string sender_public_key = 8;
+ * @return {string}
+ */
+proto.events.Envelope.prototype.getSenderPublicKey = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.events.Envelope} returns this
+ */
+proto.events.Envelope.prototype.setSenderPublicKey = function(value) {
+  return jspb.Message.setProto3StringField(this, 8, value);
+};
+
+
+/**
+ * optional string receiver_public_key = 9;
+ * @return {string}
+ */
+proto.events.Envelope.prototype.getReceiverPublicKey = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 9, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.events.Envelope} returns this
+ */
+proto.events.Envelope.prototype.setReceiverPublicKey = function(value) {
+  return jspb.Message.setProto3StringField(this, 9, value);
+};
+
+
 
 
 
@@ -626,7 +686,8 @@ proto.events.RequestInboxRegisterEvent.toObject = function(includeInstance, msg)
   var f, obj = {
     userAddress: jspb.Message.getFieldWithDefault(msg, 1, ""),
     timestamp: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    hid: jspb.Message.getFieldWithDefault(msg, 3, 0)
+    hid: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    publicKey: jspb.Message.getFieldWithDefault(msg, 4, "")
   };
 
   if (includeInstance) {
@@ -675,6 +736,10 @@ proto.events.RequestInboxRegisterEvent.deserializeBinaryFromReader = function(ms
       var value = /** @type {number} */ (reader.readInt32());
       msg.setHid(value);
       break;
+    case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setPublicKey(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -722,6 +787,13 @@ proto.events.RequestInboxRegisterEvent.serializeBinaryToWriter = function(messag
   if (f !== 0) {
     writer.writeInt32(
       3,
+      f
+    );
+  }
+  f = message.getPublicKey();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
       f
     );
   }
@@ -779,6 +851,24 @@ proto.events.RequestInboxRegisterEvent.prototype.getHid = function() {
  */
 proto.events.RequestInboxRegisterEvent.prototype.setHid = function(value) {
   return jspb.Message.setProto3IntField(this, 3, value);
+};
+
+
+/**
+ * optional string public_key = 4;
+ * @return {string}
+ */
+proto.events.RequestInboxRegisterEvent.prototype.getPublicKey = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.events.RequestInboxRegisterEvent} returns this
+ */
+proto.events.RequestInboxRegisterEvent.prototype.setPublicKey = function(value) {
+  return jspb.Message.setProto3StringField(this, 4, value);
 };
 
 

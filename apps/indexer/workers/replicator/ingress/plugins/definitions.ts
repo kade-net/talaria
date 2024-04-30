@@ -1,4 +1,4 @@
-import talaria, { events } from '@kade/grpc';
+import talaria, { events } from "@kade/hermes-tunnel";
 import { EVENT_NAMES } from "../../../../types";
 
 

@@ -1,13 +1,14 @@
 {
-  "name": "@kade/grpc",
-  "version": "1.0.0",
+  "name": "@kade/hermes-tunnel",
+  "version": "0.0.1",
   "description": "",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rm -rf ./dist && tsup"
+    "build": "rm -rf ./dist && tsup",
+    "generate": "rm -rf  generated/* && sh ./build.sh"
   },
   "exports": {
     ".": {
