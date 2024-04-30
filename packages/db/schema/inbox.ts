@@ -1,4 +1,4 @@
-import { boolean, pgTable, text, timestamp } from "drizzle-orm/pg-core";
+import { boolean, json, pgTable, text, timestamp } from "drizzle-orm/pg-core";
 import { phonebook } from "./phonebook";
 import { relations } from "drizzle-orm";
 
@@ -33,7 +33,8 @@ export const envelope = pgTable("envelope", {
     hid: text("hid").notNull(),
     inbox_name: text("inbox_name").notNull().references(() => inbox.id),
     sender_public_key: text("sender_public_key").notNull(),
-    reciever_pubic_key: text("reciever_public_key").notNull()
+    reciever_pubic_key: text("reciever_public_key").notNull(),
+    content: json("content")
 })
 
 export type ENVELOPE = typeof envelope.$inferSelect

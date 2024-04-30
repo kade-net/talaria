@@ -1,0 +1,66 @@
+scalar Date
+scalar JSON
+
+input Pagination {
+  page: Int!
+  size: Int!
+}
+
+enum SortOrder {
+  ASC
+  DESC
+}
+
+type PhoneBook {
+  address: String!
+  hid: String!
+  timestamp: Date
+  public_key: String!
+  contacts: [Contact!]
+  delegates: [Delegate!]
+}
+
+type Contact {
+  address: String!
+  user_address: String!
+  accepted: Boolean!
+  timestamp: Date
+  envelope: JSON
+}
+
+type Delegate {
+  address: String!
+  user_address: String!
+  timestamp: Date
+  hid: String!
+}
+
+type Inbox {
+  id: String!
+  owner_address: String!
+  initiator_address: String!
+  timestamp: Date
+  hid: String!
+  active: Boolean!
+}
+
+type Envelope {
+  id: String!
+  ref: String!
+  timestamp: Date
+  hid: String!
+  inbox_name: String!
+  sender_public_key: String!
+  receiver_public_key: String!
+  content: JSON
+}
+
+type Query {
+  phoneBook(address: String!): PhoneBook
+  inboxHistory(
+    inbox_name: String!
+    pagination: Pagination
+    sort: SortOrder
+  ): [Envelope!]
+  inboxes(address: String!, pagination: Pagination, sort: SortOrder): [Inbox!]
+}
