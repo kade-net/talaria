@@ -8,7 +8,8 @@
     "pull": "ts-node --esm ./workers/grpc-worker/main.ts",
     "replicate": "ts-node --esm ./workers/replicator/main.ts",
     "ingress:dev": "ts-node --esm workers/replicator/ingress/index.ts",
-    "ingress:test": "ts-node --esm workers/replicator/ingress/test.ts"
+    "ingress:test": "ts-node --esm workers/replicator/ingress/test.ts",
+    "all": "pnpm pull & pnpm replicate & pnpm ingress:dev"
   },
   "keywords": [],
   "author": "",
