@@ -1,5 +1,5 @@
 {
-  "name": "@kade/hermes-tunnel",
+  "name": "@kade-net/hermes-tunnel",
   "version": "0.0.1",
   "description": "",
   "main": "./dist/index.js",

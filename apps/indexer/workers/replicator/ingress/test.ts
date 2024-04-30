@@ -1,4 +1,4 @@
-import { TalariaServiceClient, credentials, events } from "@kade/hermes-tunnel"
+import { TalariaServiceClient, credentials, events } from "@kade-net/hermes-tunnel"
 
 const client = new TalariaServiceClient('localhost:8089', credentials.createInsecure())
 

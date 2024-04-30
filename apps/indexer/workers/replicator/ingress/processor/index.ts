@@ -1,4 +1,4 @@
-import talaria, { events, sendUnaryData } from "@kade/hermes-tunnel";
+import talaria, { events, sendUnaryData } from "@kade-net/hermes-tunnel";
 import { IngressPlugin } from "../plugins/definitions";
 import lmdb from "node-lmdb";
 import _ from "lodash";

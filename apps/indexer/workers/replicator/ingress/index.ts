@@ -1,5 +1,5 @@
 import 'dotenv/config'
-import talaria, { UnimplementedTalariaServiceService } from '@kade/hermes-tunnel'
+import talaria, { UnimplementedTalariaServiceService } from '@kade-net/hermes-tunnel'
 import talariaSever from './server'
 
 const server = new talaria.Server()

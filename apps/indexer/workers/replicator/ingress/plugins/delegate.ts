@@ -1,4 +1,4 @@
-import { ServerWritableStream, events, sendUnaryData } from "@kade/hermes-tunnel";
+import { ServerWritableStream, events, sendUnaryData } from "@kade-net/hermes-tunnel";
 import { EVENT_NAMES } from "../../../../types";
 import { IngressPlugin } from "./definitions";
 import { delegate_register_event, delegate_remove_event } from "zschema";

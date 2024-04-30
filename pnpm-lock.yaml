@@ -47,7 +47,7 @@ importers:
       '@grpc/grpc-js':
         specifier: ^1.10.6
         version: 1.10.6
-      '@kade/hermes-tunnel':
+      '@kade-net/hermes-tunnel':
         specifier: workspace:^
         version: link:../../packages/grpc
       '@kade/posthog':
