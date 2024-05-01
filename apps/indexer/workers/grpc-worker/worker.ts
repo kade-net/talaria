@@ -49,6 +49,7 @@ export class Worker {
             await this.db.putVersion(startingVersion)
         }
 
+        console.log("Starting Version", startingVersion)
         const request: aptos.indexer.v1.GetTransactionsRequest = {
             startingVersion: startingVersion,
         }

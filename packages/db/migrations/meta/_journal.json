@@ -8,6 +8,13 @@
       "when": 1714560864350,
       "tag": "0000_motionless_tarantula",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1714582061431,
+      "tag": "0001_slim_wildside",
+      "breakpoints": true
     }
   ]
 }

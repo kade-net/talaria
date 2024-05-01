@@ -34,7 +34,9 @@ export class EnvelopeProcessor implements ProcessorPlugin {
                 sender_public_key: data.sender_public_key,
                 content: data.content.startsWith("{") ? JSON.parse(data.content) : {
                     content: data.content
-                }
+                },
+                sender: data.sender,
+                receiver: data.receiver
             })
 
         }
