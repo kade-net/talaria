@@ -4,6 +4,7 @@ import { ProcessorPlugin } from "../plugin";
 import * as schema from 'zschema'
 import db, { orm } from "db";
 import { contact, delegate, inbox, phonebook } from "db/schema";
+import { randomUUID } from "crypto";
 
 export class RequestInboxRegisterEventProcessor extends ProcessorPlugin {
     name(): EVENT_NAMES {
@@ -73,6 +74,7 @@ export class RequestEventProcessor extends ProcessorPlugin {
                     user_address: data.inbox_owner_address,
                     envelope: data.envelope, // TODO: possible parsing of the envelope content needs to happen here
                     timestamp: data.timestamp,
+                    id: randomUUID()
                 })
             })
 
