@@ -56,7 +56,7 @@ type Envelope {
   hid: String!
   inbox_name: String!
   sender_public_key: String!
-  receiver_public_key: String!
+  reciever_public_key: String!
   content: JSON
 }
 
