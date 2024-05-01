@@ -37,7 +37,11 @@ export const hermesQueries: ResolverMap = {
                 limit: args?.pagination?.size ?? 20
             })
 
-            return envelopes ?? []
+            // TODO: handle this properly
+            return envelopes?.map((p) => ({
+                ...p,
+                reciever_public_key: p.reciever_pubic_key
+            })) ?? []
         },
         inboxes: async (_, args, __) => {
             const inboxes = await db.query.inbox.findMany({
