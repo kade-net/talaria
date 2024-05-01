@@ -58,6 +58,8 @@ type Envelope {
   sender_public_key: String!
   reciever_public_key: String!
   content: JSON
+  sender: String!
+  receiver: String!
 }
 
 type Query {
