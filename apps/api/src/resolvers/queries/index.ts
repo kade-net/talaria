@@ -43,10 +43,10 @@ export const hermesQueries: ResolverMap = {
             const inboxes = await db.query.inbox.findMany({
                 where(fields, ops) {
                     if (args.active) {
-                        return ops.or(
+                        return ops.and(ops.or(
                             ops.eq(fields.initiator_address, args.address),
-                            ops.eq(fields.owner_address, args.address)
-                        )
+                            ops.eq(fields.owner_address, args.address),
+                        ), ops.eq(fields.active, true))
                     } else {
                         if (args.type === "SENT") {
                             return orm.and(
