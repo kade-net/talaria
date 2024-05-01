@@ -11,6 +11,11 @@ enum SortOrder {
   DESC
 }
 
+enum InboxType {
+  SENT
+  RECEIVED
+}
+
 type PhoneBook {
   address: String!
   hid: String!
@@ -62,5 +67,11 @@ type Query {
     pagination: Pagination
     sort: SortOrder
   ): [Envelope!]
-  inboxes(address: String!, pagination: Pagination, sort: SortOrder): [Inbox!]
+  inboxes(
+    address: String!
+    pagination: Pagination
+    sort: SortOrder
+    active: Boolean
+    type: InboxType
+  ): [Inbox!]
 }

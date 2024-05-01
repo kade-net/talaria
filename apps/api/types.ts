@@ -10,3 +10,4 @@ export type PaginationArg = {
 }
 
 export type SORT_ORDER = "ASC" | "DESC"
+export type INBOX_TYPE = "SENT" | "RECEIVED"

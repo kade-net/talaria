@@ -1,5 +1,5 @@
 import { DELEGATE, PHONEBOOK, envelope, inbox, phonebook } from "db/schema"
-import { PaginationArg, Resolver, SORT_ORDER } from "../../../types"
+import { INBOX_TYPE, PaginationArg, Resolver, SORT_ORDER } from "../../../types"
 import db, { orm } from "db"
 
 
@@ -7,7 +7,7 @@ interface ResolverMap {
     Query: {
         phoneBook: Resolver<never, { address: string }, never>
         inboxHistory: Resolver<never, PaginationArg & { inbox_name: string, sort: SORT_ORDER }, never>
-        inboxes: Resolver<never, PaginationArg & { address: string, sort: SORT_ORDER }, never>
+        inboxes: Resolver<never, PaginationArg & { address: string, sort: SORT_ORDER, active: boolean, type: INBOX_TYPE }, never>
     },
     PhoneBook: {
         contacts: Resolver<PHONEBOOK, never, never>
@@ -42,7 +42,31 @@ export const hermesQueries: ResolverMap = {
         inboxes: async (_, args, __) => {
             const inboxes = await db.query.inbox.findMany({
                 where(fields, ops) {
-                    return ops.or(ops.eq(fields.owner_address, args.address), ops.eq(fields.initiator_address, args.address))
+                    if (args.active) {
+                        if (args.type === "SENT") {
+                            return orm.and(
+                                ops.eq(fields.initiator_address, args.address),
+                                ops.eq(fields.active, true)
+                            )
+                        } else {
+                            return orm.and(
+                                ops.eq(fields.owner_address, args.address),
+                                ops.eq(fields.active, true)
+                            )
+                        }
+                    } else {
+                        if (args.type === "SENT") {
+                            return orm.and(
+                                ops.eq(fields.initiator_address, args.address),
+                                ops.eq(fields.active, false)
+                            )
+                        } else {
+                            return orm.and(
+                                ops.eq(fields.owner_address, args.address),
+                                ops.eq(fields.active, false)
+                            )
+                        }
+                    }
                 },
                 orderBy: orm.desc(inbox.timestamp)
             })
