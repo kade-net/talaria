@@ -5,29 +5,8 @@
     {
       "idx": 0,
       "version": "5",
-      "when": 1713802137288,
-      "tag": "0000_brave_baron_strucker",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "5",
-      "when": 1714396626829,
-      "tag": "0001_material_dreaming_celestial",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "5",
-      "when": 1714470201430,
-      "tag": "0002_green_alice",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "5",
-      "when": 1714499019615,
-      "tag": "0003_purple_lord_tyger",
+      "when": 1714560864350,
+      "tag": "0000_motionless_tarantula",
       "breakpoints": true
     }
   ]

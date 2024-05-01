@@ -23,7 +23,8 @@ export const phonebookRelations = relations(phonebook, ({ many, one }) => {
 })
 
 export const contact = pgTable("contact", {
-    address: text("address").notNull().primaryKey(),
+    id: text("id").notNull().primaryKey(),
+    address: text("address"),
     user_address: text("user_address").notNull().references(() => phonebook.address),
     accepted: boolean("accepted").notNull().default(false),
     timestamp: timestamp("timestamp").notNull(),

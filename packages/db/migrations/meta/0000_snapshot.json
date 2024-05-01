@@ -1,5 +1,5 @@
 {
-  "id": "e90f3dfe-1157-4df5-80a4-fa64f86aba08",
+  "id": "ba7c80d1-1104-4c24-88a9-767b49e510ad",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -8,11 +8,17 @@
       "name": "contact",
       "schema": "",
       "columns": {
-        "address": {
-          "name": "address",
+        "id": {
+          "name": "id",
           "type": "text",
           "primaryKey": true,
           "notNull": true
+        },
+        "address": {
+          "name": "address",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
         },
         "user_address": {
           "name": "user_address",
@@ -128,6 +134,12 @@
           "type": "timestamp",
           "primaryKey": false,
           "notNull": true
+        },
+        "public_key": {
+          "name": "public_key",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "indexes": {},
@@ -177,10 +189,48 @@
           "type": "text",
           "primaryKey": false,
           "notNull": true
+        },
+        "inbox_name": {
+          "name": "inbox_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "sender_public_key": {
+          "name": "sender_public_key",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "reciever_public_key": {
+          "name": "reciever_public_key",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "content": {
+          "name": "content",
+          "type": "json",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "envelope_inbox_name_inbox_id_fk": {
+          "name": "envelope_inbox_name_inbox_id_fk",
+          "tableFrom": "envelope",
+          "tableTo": "inbox",
+          "columnsFrom": [
+            "inbox_name"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
@@ -208,7 +258,7 @@
         },
         "timestamp": {
           "name": "timestamp",
-          "type": "text",
+          "type": "timestamp",
           "primaryKey": false,
           "notNull": true
         },
@@ -217,6 +267,13 @@
           "type": "text",
           "primaryKey": false,
           "notNull": true
+        },
+        "active": {
+          "name": "active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
         }
       },
       "indexes": {},

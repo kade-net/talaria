@@ -1,1 +1,0 @@
-ALTER TABLE "envelope" ADD COLUMN "content" json;
