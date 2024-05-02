@@ -68,6 +68,7 @@ type Query {
     inbox_name: String!
     pagination: Pagination
     sort: SortOrder
+    timestamp: Date
   ): [Envelope!]
   inboxes(
     address: String!

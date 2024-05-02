@@ -6,7 +6,7 @@ import db, { orm } from "db"
 interface ResolverMap {
     Query: {
         phoneBook: Resolver<never, { address: string }, never>
-        inboxHistory: Resolver<never, PaginationArg & { inbox_name: string, sort: SORT_ORDER }, never>
+        inboxHistory: Resolver<never, PaginationArg & { inbox_name: string, sort: SORT_ORDER, timestamp: number }, never>
         inboxes: Resolver<never, PaginationArg & { address: string, sort: SORT_ORDER, active: boolean, type: INBOX_TYPE }, never>
     },
     PhoneBook: {
@@ -30,7 +30,10 @@ export const hermesQueries: ResolverMap = {
         inboxHistory: async (_, args, __) => {
             const envelopes = await db.query.envelope.findMany({
                 where(fields, ops) {
-                    return ops.eq(fields.inbox_name, args.inbox_name)
+                    return ops.and(
+                        ops.eq(fields.inbox_name, args.inbox_name),
+                        args.timestamp ? ops.gte(fields.timestamp, new Date(args.timestamp)) : undefined
+                    ) 
                 },
                 orderBy: orm.asc(phonebook.timestamp),
                 offset: ((args?.pagination?.size ?? 0) * (args?.pagination?.page ?? 0)),
