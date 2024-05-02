@@ -32,7 +32,7 @@ export const hermesQueries: ResolverMap = {
                 where(fields, ops) {
                     return ops.eq(fields.inbox_name, args.inbox_name)
                 },
-                orderBy: orm.desc(phonebook.timestamp),
+                orderBy: orm.asc(phonebook.timestamp),
                 offset: ((args?.pagination?.size ?? 0) * (args?.pagination?.page ?? 0)),
                 limit: args?.pagination?.size ?? 20
             })
