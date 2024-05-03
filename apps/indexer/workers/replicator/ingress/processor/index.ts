@@ -59,6 +59,9 @@ export class DataProcessor {
     }
 
     async process(call: talaria.ServerWritableStream<events.EventsRequest, events.Event>, _last_read?: number) {
+        if (call.closed) {
+            return
+        }
         // Getting last read as a string
         console.log("Processing data", _last_read)
         let last_read = "000000000"
