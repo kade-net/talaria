@@ -40,7 +40,7 @@ export class Worker {
         let startingVersion = BigInt(0) // pass in the starting version;
         let currentStartingVersion = await this.db.getLatestVersion()
         console.log("Latest Version", currentStartingVersion)
-        if (currentStartingVersion > (_startingVersion ?? BigInt(0))) {
+        if (currentStartingVersion > (_startingVersion ?? 0n)) {
             startingVersion = currentStartingVersion
         } else {
             if (_startingVersion) {
@@ -49,7 +49,6 @@ export class Worker {
             await this.db.putVersion(startingVersion)
         }
 
-        console.log("Starting Version", startingVersion)
         const request: aptos.indexer.v1.GetTransactionsRequest = {
             startingVersion: startingVersion,
         }
