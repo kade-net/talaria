@@ -15,7 +15,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@aptos-labs/aptos-protos": "^1.1.3",
+    "@aptos-labs/aptos-protos": "1.1.2",
     "@grpc/grpc-js": "^1.10.6",
     "@kade-net/hermes-tunnel": "workspace:^",
     "@kade/posthog": "workspace:^",
