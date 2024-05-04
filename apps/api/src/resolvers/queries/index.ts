@@ -92,6 +92,8 @@ export const hermesQueries: ResolverMap = {
                     )
                 }
             })
+
+            return inbox
         }
     },
     PhoneBook: {
