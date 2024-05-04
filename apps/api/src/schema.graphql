@@ -77,4 +77,9 @@ type Query {
     active: Boolean
     type: InboxType
   ): [Inbox!]
+  inbox(
+    viewer: String! 
+    address: String!
+    active: Boolean
+  )
 }
