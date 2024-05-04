@@ -81,5 +81,5 @@ type Query {
     viewer: String! 
     address: String!
     active: Boolean
-  )
+  ): Inbox
 }
