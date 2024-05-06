@@ -38,6 +38,7 @@ type Delegate {
   user_address: String!
   timestamp: Date
   hid: String!
+  public_key: String
 }
 
 type Inbox {
@@ -60,6 +61,7 @@ type Envelope {
   content: JSON
   sender: String!
   receiver: String!
+  delegate_public_key: String
 }
 
 type Query {

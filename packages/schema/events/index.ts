@@ -11,7 +11,8 @@ export const envelope = z.object({
     ref: z.string().optional(),
     inbox_name: z.string(),
     sender_public_key: z.string(),
-    receiver_public_key: z.string()
+    receiver_public_key: z.string(),
+    delegate_public_key: z.string()
 })
 
 export const request_inbox_register_event = z.object({
@@ -54,7 +55,8 @@ export const delegate_register_event = z.object({
     owner: z.string(),
     delegate_hid: z.string(),
     user_hid: z.string(),
-    delegate_address: z.string()
+    delegate_address: z.string(),
+    public_key: z.string(),
 })
 
 export const delegate_remove_event = z.object({

@@ -22,7 +22,8 @@ export class DelegateRegisterEvent implements IngressPlugin {
                     owner: parsed_data.owner,
                     delegate_hid: parsed_data.delegate_hid,
                     user_hid: parsed_data.user_hid,
-                    delegate_address: parsed_data.delegate_address
+                    delegate_address: parsed_data.delegate_address,
+                    public_key: parsed_data.public_key
                 })
             });
         } catch(err) {

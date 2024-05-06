@@ -28,7 +28,8 @@ export class EnvelopePlugin implements IngressPlugin {
                     ref: parsed_data.ref,
                     inbox_name: parsed_data.inbox_name,
                     receiver_public_key: parsed_data.receiver_public_key,
-                    sender_public_key: parsed_data.sender_public_key
+                    sender_public_key: parsed_data.sender_public_key,
+                    delegate_public_key: parsed_data.delegate_public_key
                 })
             });
         } catch(err) {

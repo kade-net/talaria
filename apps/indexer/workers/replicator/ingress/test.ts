@@ -1,14 +1,14 @@
 import { TalariaServiceClient, credentials, events } from "@kade-net/hermes-tunnel"
 
-const client = new TalariaServiceClient('localhost:8089', credentials.createInsecure())
+const client = new TalariaServiceClient('monorail.proxy.rlwy.net:24651', credentials.createInsecure())
 
 function main() {
     const call = client.GetTalariaEvents(new events.EventsRequest({
-        event_type: "_",
+        event_type: "Envelope",
         sequence_number: 0
     }))
 
-    call.on('data', (data: any) => {
+    call.on('data', (data: events.EventsRequest) => {
         console.log("Data::", data.toObject())
     })
 

@@ -36,7 +36,8 @@ export class EnvelopeProcessor implements ProcessorPlugin {
                     content: data.content
                 },
                 sender: data.sender,
-                receiver: data.receiver
+                receiver: data.receiver,
+                delegate_public_key: data.delegate_public_key
             })
 
         }

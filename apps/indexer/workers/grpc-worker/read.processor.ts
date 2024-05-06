@@ -67,12 +67,16 @@ export class ReadProcessor extends TransactionsProcessor {
 
             const userTransaction = transaction.user!;
 
+
             const hex_signature = userTransaction.request?.signature?.ed25519?.signature ?
                 Buffer.from(userTransaction.request?.signature?.ed25519?.signature!).toString('hex') : ''
 
             if (!userTransaction.events) {
                 continue
             }
+
+            const _publicKey = userTransaction.request?.signature?.ed25519?.publicKey!// All transactions are signed with ed25519
+            const publicKey = Buffer.from(_publicKey).toString('hex')
 
             const events = userTransaction.events!;
 
@@ -84,6 +88,7 @@ export class ReadProcessor extends TransactionsProcessor {
                         type: eventType?.split("::")?.at(2),
                         event: event.data,
                         signature: hex_signature,
+                        publicKey
                     })
                 }
             }
