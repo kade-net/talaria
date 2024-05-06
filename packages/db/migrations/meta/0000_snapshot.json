@@ -1,5 +1,5 @@
 {
-  "id": "ba7c80d1-1104-4c24-88a9-767b49e510ad",
+  "id": "e5c87110-e3e6-4d04-a8c3-f73081fa72b6",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -89,6 +89,12 @@
         },
         "hid": {
           "name": "hid",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "public_key": {
+          "name": "public_key",
           "type": "text",
           "primaryKey": false,
           "notNull": true
@@ -211,6 +217,24 @@
         "content": {
           "name": "content",
           "type": "json",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sender": {
+          "name": "sender",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "receiver": {
+          "name": "receiver",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "delegate_public_key": {
+          "name": "delegate_public_key",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         }

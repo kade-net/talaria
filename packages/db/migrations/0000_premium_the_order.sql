@@ -11,7 +11,8 @@ CREATE TABLE IF NOT EXISTS "delegate" (
 	"address" text PRIMARY KEY NOT NULL,
 	"user_address" text NOT NULL,
 	"timestamp" timestamp NOT NULL,
-	"hid" text NOT NULL
+	"hid" text NOT NULL,
+	"public_key" text NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "phonebook" (
@@ -31,7 +32,10 @@ CREATE TABLE IF NOT EXISTS "envelope" (
 	"inbox_name" text NOT NULL,
 	"sender_public_key" text NOT NULL,
 	"reciever_public_key" text NOT NULL,
-	"content" json
+	"content" json,
+	"sender" text NOT NULL,
+	"receiver" text NOT NULL,
+	"delegate_public_key" text
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "inbox" (
