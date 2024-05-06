@@ -16,6 +16,7 @@ export namespace events {
             inbox_name?: string;
             sender_public_key?: string;
             receiver_public_key?: string;
+            delegate_public_key?: string;
         } & (({
             ref?: string;
         })))) {
@@ -48,6 +49,9 @@ export namespace events {
                 }
                 if ("receiver_public_key" in data && data.receiver_public_key != undefined) {
                     this.receiver_public_key = data.receiver_public_key;
+                }
+                if ("delegate_public_key" in data && data.delegate_public_key != undefined) {
+                    this.delegate_public_key = data.delegate_public_key;
                 }
             }
         }
@@ -108,6 +112,12 @@ export namespace events {
         set receiver_public_key(value: string) {
             pb_1.Message.setField(this, 9, value);
         }
+        get delegate_public_key() {
+            return pb_1.Message.getFieldWithDefault(this, 10, "") as string;
+        }
+        set delegate_public_key(value: string) {
+            pb_1.Message.setField(this, 10, value);
+        }
         get _ref() {
             const cases: {
                 [index: number]: "none" | "ref";
@@ -127,6 +137,7 @@ export namespace events {
             inbox_name?: string;
             sender_public_key?: string;
             receiver_public_key?: string;
+            delegate_public_key?: string;
         }): Envelope {
             const message = new Envelope({});
             if (data.sender != null) {
@@ -156,6 +167,9 @@ export namespace events {
             if (data.receiver_public_key != null) {
                 message.receiver_public_key = data.receiver_public_key;
             }
+            if (data.delegate_public_key != null) {
+                message.delegate_public_key = data.delegate_public_key;
+            }
             return message;
         }
         toObject() {
@@ -169,6 +183,7 @@ export namespace events {
                 inbox_name?: string;
                 sender_public_key?: string;
                 receiver_public_key?: string;
+                delegate_public_key?: string;
             } = {};
             if (this.sender != null) {
                 data.sender = this.sender;
@@ -197,6 +212,9 @@ export namespace events {
             if (this.receiver_public_key != null) {
                 data.receiver_public_key = this.receiver_public_key;
             }
+            if (this.delegate_public_key != null) {
+                data.delegate_public_key = this.delegate_public_key;
+            }
             return data;
         }
         serialize(): Uint8Array;
@@ -221,6 +239,8 @@ export namespace events {
                 writer.writeString(8, this.sender_public_key);
             if (this.receiver_public_key.length)
                 writer.writeString(9, this.receiver_public_key);
+            if (this.delegate_public_key.length)
+                writer.writeString(10, this.delegate_public_key);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -256,6 +276,9 @@ export namespace events {
                         break;
                     case 9:
                         message.receiver_public_key = reader.readString();
+                        break;
+                    case 10:
+                        message.delegate_public_key = reader.readString();
                         break;
                     default: reader.skipField();
                 }
@@ -979,6 +1002,7 @@ export namespace events {
             delegate_hid?: string;
             user_hid?: string;
             delegate_address?: string;
+            public_key?: string;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
@@ -994,6 +1018,9 @@ export namespace events {
                 }
                 if ("delegate_address" in data && data.delegate_address != undefined) {
                     this.delegate_address = data.delegate_address;
+                }
+                if ("public_key" in data && data.public_key != undefined) {
+                    this.public_key = data.public_key;
                 }
             }
         }
@@ -1021,11 +1048,18 @@ export namespace events {
         set delegate_address(value: string) {
             pb_1.Message.setField(this, 4, value);
         }
+        get public_key() {
+            return pb_1.Message.getFieldWithDefault(this, 5, "") as string;
+        }
+        set public_key(value: string) {
+            pb_1.Message.setField(this, 5, value);
+        }
         static fromObject(data: {
             owner?: string;
             delegate_hid?: string;
             user_hid?: string;
             delegate_address?: string;
+            public_key?: string;
         }): DelegateRegisterEvent {
             const message = new DelegateRegisterEvent({});
             if (data.owner != null) {
@@ -1040,6 +1074,9 @@ export namespace events {
             if (data.delegate_address != null) {
                 message.delegate_address = data.delegate_address;
             }
+            if (data.public_key != null) {
+                message.public_key = data.public_key;
+            }
             return message;
         }
         toObject() {
@@ -1048,6 +1085,7 @@ export namespace events {
                 delegate_hid?: string;
                 user_hid?: string;
                 delegate_address?: string;
+                public_key?: string;
             } = {};
             if (this.owner != null) {
                 data.owner = this.owner;
@@ -1060,6 +1098,9 @@ export namespace events {
             }
             if (this.delegate_address != null) {
                 data.delegate_address = this.delegate_address;
+            }
+            if (this.public_key != null) {
+                data.public_key = this.public_key;
             }
             return data;
         }
@@ -1075,6 +1116,8 @@ export namespace events {
                 writer.writeString(3, this.user_hid);
             if (this.delegate_address.length)
                 writer.writeString(4, this.delegate_address);
+            if (this.public_key.length)
+                writer.writeString(5, this.public_key);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -1095,6 +1138,9 @@ export namespace events {
                         break;
                     case 4:
                         message.delegate_address = reader.readString();
+                        break;
+                    case 5:
+                        message.public_key = reader.readString();
                         break;
                     default: reader.skipField();
                 }

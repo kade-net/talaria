@@ -222,7 +222,8 @@ export class DelegateRegisterEventProcessor extends ProcessorPlugin {
                 address: data.delegate_address,
                 hid: `${data.delegate_hid}`,
                 user_address: data.owner,
-                timestamp: new Date()
+                timestamp: new Date(),
+                public_key: data.public_key
             })
 
             // TODO: handle this

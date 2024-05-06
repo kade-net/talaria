@@ -12,6 +12,7 @@ message Envelope {
     string inbox_name = 7;
     string sender_public_key = 8;
     string receiver_public_key = 9;
+    string delegate_public_key = 10;
 } 
 
 message RequestInboxRegisterEvent {
@@ -55,6 +56,7 @@ message DelegateRegisterEvent {
     string delegate_hid = 2;
     string user_hid = 3;
     string delegate_address = 4;
+    string public_key = 5;
 }
 
 message DelegateRemoveEvent {

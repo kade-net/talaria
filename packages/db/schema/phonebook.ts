@@ -46,7 +46,8 @@ export const delegate = pgTable("delegate", {
     address: text("address").notNull().primaryKey(),
     user_address: text("user_address").notNull().references(() => phonebook.address),
     timestamp: timestamp("timestamp").notNull(),
-    hid: text("hid").notNull()
+    hid: text("hid").notNull(),
+    public_key: text("public_key").notNull()
 })
 
 export type DELEGATE = typeof delegate.$inferSelect

@@ -304,7 +304,8 @@ proto.events.Envelope.toObject = function(includeInstance, msg) {
     ref: jspb.Message.getFieldWithDefault(msg, 6, ""),
     inboxName: jspb.Message.getFieldWithDefault(msg, 7, ""),
     senderPublicKey: jspb.Message.getFieldWithDefault(msg, 8, ""),
-    receiverPublicKey: jspb.Message.getFieldWithDefault(msg, 9, "")
+    receiverPublicKey: jspb.Message.getFieldWithDefault(msg, 9, ""),
+    delegatePublicKey: jspb.Message.getFieldWithDefault(msg, 10, "")
   };
 
   if (includeInstance) {
@@ -376,6 +377,10 @@ proto.events.Envelope.deserializeBinaryFromReader = function(msg, reader) {
     case 9:
       var value = /** @type {string} */ (reader.readString());
       msg.setReceiverPublicKey(value);
+      break;
+    case 10:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setDelegatePublicKey(value);
       break;
     default:
       reader.skipField();
@@ -466,6 +471,13 @@ proto.events.Envelope.serializeBinaryToWriter = function(message, writer) {
   if (f.length > 0) {
     writer.writeString(
       9,
+      f
+    );
+  }
+  f = message.getDelegatePublicKey();
+  if (f.length > 0) {
+    writer.writeString(
+      10,
       f
     );
   }
@@ -649,6 +661,24 @@ proto.events.Envelope.prototype.getReceiverPublicKey = function() {
  */
 proto.events.Envelope.prototype.setReceiverPublicKey = function(value) {
   return jspb.Message.setProto3StringField(this, 9, value);
+};
+
+
+/**
+ * optional string delegate_public_key = 10;
+ * @return {string}
+ */
+proto.events.Envelope.prototype.getDelegatePublicKey = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 10, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.events.Envelope} returns this
+ */
+proto.events.Envelope.prototype.setDelegatePublicKey = function(value) {
+  return jspb.Message.setProto3StringField(this, 10, value);
 };
 
 
@@ -1817,7 +1847,8 @@ proto.events.DelegateRegisterEvent.toObject = function(includeInstance, msg) {
     owner: jspb.Message.getFieldWithDefault(msg, 1, ""),
     delegateHid: jspb.Message.getFieldWithDefault(msg, 2, ""),
     userHid: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    delegateAddress: jspb.Message.getFieldWithDefault(msg, 4, "")
+    delegateAddress: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    publicKey: jspb.Message.getFieldWithDefault(msg, 5, "")
   };
 
   if (includeInstance) {
@@ -1869,6 +1900,10 @@ proto.events.DelegateRegisterEvent.deserializeBinaryFromReader = function(msg, r
     case 4:
       var value = /** @type {string} */ (reader.readString());
       msg.setDelegateAddress(value);
+      break;
+    case 5:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setPublicKey(value);
       break;
     default:
       reader.skipField();
@@ -1924,6 +1959,13 @@ proto.events.DelegateRegisterEvent.serializeBinaryToWriter = function(message, w
   if (f.length > 0) {
     writer.writeString(
       4,
+      f
+    );
+  }
+  f = message.getPublicKey();
+  if (f.length > 0) {
+    writer.writeString(
+      5,
       f
     );
   }
@@ -1999,6 +2041,24 @@ proto.events.DelegateRegisterEvent.prototype.getDelegateAddress = function() {
  */
 proto.events.DelegateRegisterEvent.prototype.setDelegateAddress = function(value) {
   return jspb.Message.setProto3StringField(this, 4, value);
+};
+
+
+/**
+ * optional string public_key = 5;
+ * @return {string}
+ */
+proto.events.DelegateRegisterEvent.prototype.getPublicKey = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.events.DelegateRegisterEvent} returns this
+ */
+proto.events.DelegateRegisterEvent.prototype.setPublicKey = function(value) {
+  return jspb.Message.setProto3StringField(this, 5, value);
 };
 
 
