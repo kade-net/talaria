@@ -75,9 +75,6 @@ export class ReadProcessor extends TransactionsProcessor {
                 continue
             }
 
-            const _publicKey = userTransaction.request?.signature?.ed25519?.publicKey!// All transactions are signed with ed25519
-            const publicKey = Buffer.from(_publicKey).toString('hex')
-
             const events = userTransaction.events!;
 
             for (const event of events) {
@@ -87,8 +84,7 @@ export class ReadProcessor extends TransactionsProcessor {
                     await db.put({
                         type: eventType?.split("::")?.at(2),
                         event: event.data,
-                        signature: hex_signature,
-                        publicKey
+                        signature: hex_signature
                     })
                 }
             }
