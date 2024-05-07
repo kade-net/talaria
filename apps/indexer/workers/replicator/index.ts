@@ -1,4 +1,4 @@
-import { LevelDB } from "lama"
+import { LevelDB } from "@kade-net/lama"
 import { ProcessMonitor } from "monitor"
 import { DataProcessor } from "./writer"
 

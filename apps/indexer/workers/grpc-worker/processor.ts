@@ -1,5 +1,5 @@
 import { aptos } from "@aptos-labs/aptos-protos";
-import { LevelDB } from "lama";
+import { LevelDB } from "@kade-net/lama";
 
 
 /**

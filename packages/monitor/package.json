@@ -15,6 +15,6 @@
   },
   "dependencies": {
     "@kade/posthog": "workspace:*",
-    "lama": "workspace:*"
+    "@kade-net/lama": "workspace:*"
   }
 }

@@ -21,7 +21,7 @@
     "@kade/posthog": "workspace:^",
     "db": "workspace:*",
     "dotenv": "^16.4.5",
-    "lama": "*",
+    "@kade-net/lama": "*",
     "lodash": "^4.17.21",
     "monitor": "workspace:^",
     "node-lmdb": "^0.10.0",

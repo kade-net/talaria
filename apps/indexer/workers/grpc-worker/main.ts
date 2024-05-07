@@ -1,7 +1,7 @@
 import "dotenv/config"
 import _ from "lodash"
 const { isUndefined } = _
-import { LevelDB } from "lama"
+import { LevelDB } from "@kade-net/lama"
 import { ReadProcessor } from "./read.processor"
 import { Worker } from "./worker"
     ;
