@@ -1,6 +1,11 @@
 import _ from "lodash"
-import { Lama } from "./lama"
+import { Lama, LamaReader } from "./lama"
 const { isNumber, isNull } = _;
+
+export {
+    Lama,
+    LamaReader
+}
 
 
 export abstract class EventProcessor {
