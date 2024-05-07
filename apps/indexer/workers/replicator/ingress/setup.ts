@@ -1,4 +1,4 @@
-import { LevelDB } from "lama";
+import { LevelDB } from "@kade-net/lama";
 import { DataProcessor } from "./processor";
 import { EnvelopePlugin } from "./plugins/envelope";
 import { AcceptRequestEventPlugin, RequestDeniedEventPlugin, RequestEventPlugin, RequestInboxRegisterEventPlugin, RequestRemoveFromPhonebookEventPlugin } from "./plugins/request";

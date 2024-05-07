@@ -1,5 +1,5 @@
 import protos, { aptos } from "@aptos-labs/aptos-protos";
-import { LevelDB } from "lama";
+import { LevelDB } from "@kade-net/lama";
 
 const MODULE_ADDRESS = process.env.MODULE_ADDRESS!
 

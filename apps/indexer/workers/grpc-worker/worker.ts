@@ -4,7 +4,7 @@ import { Timer } from "timer-node"
 import _ from "lodash"
 const { isNull } = _
 import { TransactionsProcessor } from "./read.processor";
-import { LevelDB } from "lama";
+import { LevelDB } from "@kade-net/lama";
 
 export function sleep(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));

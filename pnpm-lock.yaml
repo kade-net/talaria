@@ -87,6 +87,9 @@ importers:
       '@kade-net/hermes-tunnel':
         specifier: workspace:^
         version: link:../../packages/grpc
+      '@kade-net/lama':
+        specifier: '*'
+        version: link:../../packages/lama
       '@kade/posthog':
         specifier: workspace:^
         version: link:../../packages/posthog
@@ -96,9 +99,6 @@ importers:
       dotenv:
         specifier: ^16.4.5
         version: 16.4.5
-      lama:
-        specifier: '*'
-        version: link:../../packages/lama
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
@@ -208,12 +208,12 @@ importers:
 
   packages/monitor:
     dependencies:
+      '@kade-net/lama':
+        specifier: workspace:*
+        version: link:../lama
       '@kade/posthog':
         specifier: workspace:*
         version: link:../posthog
-      lama:
-        specifier: workspace:*
-        version: link:../lama
     devDependencies:
       '@types/node':
         specifier: ^20.12.7
