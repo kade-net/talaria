@@ -8,7 +8,8 @@ interface ResolverMap {
         phoneBook: Resolver<never, { address: string }, never>
         inboxHistory: Resolver<never, PaginationArg & { inbox_name: string, sort: SORT_ORDER, timestamp: number }, never>
         inboxes: Resolver<never, PaginationArg & { address: string, sort: SORT_ORDER, active: boolean, type: INBOX_TYPE }, never>
-        inbox: Resolver<never, { viewer: string, address: string, active?: boolean }, never>
+        inbox: Resolver<never, { viewer: string, address: string, active?: boolean }, never>,
+        delegates: Resolver<never, { address: string }, never>
     },
     PhoneBook: {
         contacts: Resolver<PHONEBOOK, never, never>
@@ -94,6 +95,15 @@ export const hermesQueries: ResolverMap = {
             })
 
             return inbox
+        },
+        delegates: async (_, args, __) => {
+            const delegates = await db.query.delegate.findMany({
+                where(fields, ops) {
+                    return ops.eq(fields.user_address, args.address)
+                }
+            })
+
+            return delegates ?? []
         }
     },
     PhoneBook: {

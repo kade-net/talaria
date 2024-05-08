@@ -84,4 +84,5 @@ type Query {
     address: String!
     active: Boolean
   ): Inbox
+  delegates(address: String!): [Delegate!]
 }
