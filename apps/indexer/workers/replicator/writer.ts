@@ -1,5 +1,5 @@
 import lmdb from "node-lmdb"
-import { LamaReader } from "lama/lama";
+import { LamaReader } from "@kade-net/lama";
 import { ProcessorPlugin, sleep } from "./plugin";
 import _ from "lodash";
 import { ProcessMonitor } from "monitor";

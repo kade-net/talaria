@@ -1,4 +1,4 @@
-import { Lama } from "lama/lama";
+import { Lama } from "@kade-net/lama";
 import {capture_event} from "@kade/posthog";
 
 export class ProcessMonitor {
