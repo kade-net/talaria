@@ -33,6 +33,7 @@ export class EnvelopePlugin implements IngressPlugin {
                 })
             });
         } catch(err) {
+            console.log("Error extracting Envelope event", err);
             return null;
         }
     }
@@ -43,7 +44,8 @@ export class EnvelopePlugin implements IngressPlugin {
             callback(null, event_data)
         }
         else {
-            callback(new Error("Error parsing event"), null)
+            console.log("Error processing event");
+            callback(new Error("Error parsing Envelope event"), null)
         }
     }
 
@@ -58,7 +60,7 @@ export class EnvelopePlugin implements IngressPlugin {
             })
         }
         else {
-            console.log("Error parsing event")
+            console.log("Error parsing Envelope event")
         }
     }
 }

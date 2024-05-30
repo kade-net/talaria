@@ -55,6 +55,7 @@ export class DataProcessor {
             }
 
         } catch(err) {
+            console.log("Something went wrong while processing data", err);
             callback(new Error("Something went wrong while processing data"), null);
         }
     }
