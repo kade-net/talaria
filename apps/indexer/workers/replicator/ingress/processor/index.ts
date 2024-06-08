@@ -45,8 +45,9 @@ export class DataProcessor {
             const event_data = JSON.parse(data.event)
 
             // Choose plugin to handle data
-            let chosenPlugin = this.registeredPlugins.find((p) => p.name === event_type)
+            let chosenPlugin = this.registeredPlugins.find((p) => p.name() === event_type)
             if (chosenPlugin === undefined) {
+                console.log("No plugin found for event ::", event_type);
                 callback(new Error(`No plugin found for event :: ${event_type}`), null);
             } else {
                 // Process data and return correct thing
@@ -54,6 +55,7 @@ export class DataProcessor {
             }
 
         } catch(err) {
+            console.log("Something went wrong while processing data", err);
             callback(new Error("Something went wrong while processing data"), null);
         }
     }

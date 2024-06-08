@@ -27,6 +27,7 @@ export class DelegateRegisterEvent implements IngressPlugin {
                 })
             });
         } catch(err) {
+            console.log("Error extracting DelegateRegisterEvent event", err);
             return null;
         }
     }
@@ -37,7 +38,8 @@ export class DelegateRegisterEvent implements IngressPlugin {
             callback(null, event_data)
         }
         else {
-            callback(new Error("Error parsing event"), null)
+            console.log("No event data");
+            callback(new Error("Error parsing DelegateRegisterEvent event"), null)
         }
     }
 
@@ -52,7 +54,7 @@ export class DelegateRegisterEvent implements IngressPlugin {
             })
         }
         else {
-            console.log("Error parsing event")
+            console.log("Error parsing DelegateRegisterEvent event")
         }
     }
 }
@@ -81,6 +83,7 @@ export class DelegateRemoveEventPlugin implements IngressPlugin {
                 })
             });
         } catch(err) {
+            console.log("Error extracting DelegateRemoveEvent event", err);
             return null;
         }
     }
@@ -91,6 +94,7 @@ export class DelegateRemoveEventPlugin implements IngressPlugin {
             callback(null, event_data)
         }
         else {
+            console.log("Error processing DelegateRemoveEvent event");
             callback(new Error("Error parsing event"), null)
         }
     }
@@ -106,7 +110,7 @@ export class DelegateRemoveEventPlugin implements IngressPlugin {
             })
         }
         else {
-            console.log("Error parsing event")
+            console.log("Error parsing DelegateRemoveEvent event")
         }
     }
 }

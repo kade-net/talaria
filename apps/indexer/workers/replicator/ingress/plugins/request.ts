@@ -27,6 +27,7 @@ export class RequestInboxRegisterEventPlugin implements IngressPlugin {
                 })
             });
         } catch(err) {
+            console.log("Error extracting RequestInboxRegisterEvent event", err);
             return null;
         }
     }
@@ -37,6 +38,7 @@ export class RequestInboxRegisterEventPlugin implements IngressPlugin {
             callback(null, event_data)
         }
         else {
+            console.log("Error processing RequestInboxRegisterEvent event");
             callback(new Error("Error parsing event"), null)
         }
     }
@@ -52,7 +54,7 @@ export class RequestInboxRegisterEventPlugin implements IngressPlugin {
             })
         }
         else {
-            console.log("Error parsing event")
+            console.log("Error parsing RequestInboxRegisterEvent event")
         }
     }
 }
@@ -82,6 +84,7 @@ export class RequestEventPlugin implements IngressPlugin {
                 })
             });
         } catch(err) {
+            console.log("Error extracting RequestEvent event", err);
             return null;
         }
     }
@@ -92,6 +95,7 @@ export class RequestEventPlugin implements IngressPlugin {
             callback(null, event_data)
         }
         else {
+            console.log("Error processing RequestEvent event");
             callback(new Error("Error parsing event"), null)
         }
     }
@@ -107,7 +111,7 @@ export class RequestEventPlugin implements IngressPlugin {
             })
         }
         else {
-            console.log("Error parsing event")
+            console.log("Error parsing RequestEvent event")
         }
     }
 }
@@ -136,6 +140,7 @@ export class AcceptRequestEventPlugin implements IngressPlugin {
                 })
             });
         } catch(err) {
+            console.log("Error extracting AcceptRequestEvent event", err);
             return null;
         }
     }
@@ -146,6 +151,7 @@ export class AcceptRequestEventPlugin implements IngressPlugin {
             callback(null, event_data)
         }
         else {
+            console.log("Error processing AcceptRequestEvent event");
             callback(new Error("Error parsing event"), null)
         }
     }
@@ -161,7 +167,7 @@ export class AcceptRequestEventPlugin implements IngressPlugin {
             })
         }
         else {
-            console.log("Error parsing event")
+            console.log("Error parsing AcceptRequestEvent event")
         }
     }
 }
@@ -190,6 +196,7 @@ export class RequestDeniedEventPlugin implements IngressPlugin {
                 })
             });
         } catch(err) {
+            console.log("Error extracting RequestDeniedEvent event", err);
             return null;
         }
     }
@@ -200,6 +207,7 @@ export class RequestDeniedEventPlugin implements IngressPlugin {
             callback(null, event_data)
         }
         else {
+            console.log("Error processing RequestDeniedEvent event");
             callback(new Error("Error parsing event"), null)
         }
     }
@@ -215,7 +223,7 @@ export class RequestDeniedEventPlugin implements IngressPlugin {
             })
         }
         else {
-            console.log("Error parsing event")
+            console.log("Error parsing RequestDeniedEvent event")
         }
     }
 }
@@ -244,6 +252,7 @@ export class RequestRemoveFromPhonebookEventPlugin implements IngressPlugin {
                 })
             });
         } catch(err) {
+            console.log("Error extracting RequestRemoveFromPhonebook event", err);
             return null;
         }
     }
@@ -254,6 +263,7 @@ export class RequestRemoveFromPhonebookEventPlugin implements IngressPlugin {
             callback(null, event_data)
         }
         else {
+            console.log("Error processing RequestRemoveFromPhonebook event");
             callback(new Error("Error parsing event"), null)
         }
     }
@@ -269,7 +279,7 @@ export class RequestRemoveFromPhonebookEventPlugin implements IngressPlugin {
             })
         }
         else {
-            console.log("Error parsing event")
+            console.log("Error parsing RequestRemoveFromPhonebook event")
         }
     }
 }
