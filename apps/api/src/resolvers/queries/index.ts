@@ -1,6 +1,5 @@
-import { DELEGATE, PHONEBOOK, envelope, inbox, phonebook } from "db/schema"
 import { INBOX_TYPE, PaginationArg, Resolver, SORT_ORDER } from "../../../types"
-import db, { orm } from "db"
+import db, { orm, schema } from "db"
 
 
 interface ResolverMap {
@@ -12,8 +11,8 @@ interface ResolverMap {
         delegates: Resolver<never, { address: string }, never>
     },
     PhoneBook: {
-        contacts: Resolver<PHONEBOOK, never, never>
-        delegates: Resolver<PHONEBOOK, never, never>
+        contacts: Resolver<schema.PHONEBOOK, never, never>
+        delegates: Resolver<schema.PHONEBOOK, never, never>
     }
 }
 
@@ -37,7 +36,7 @@ export const hermesQueries: ResolverMap = {
                         args.timestamp ? ops.gte(fields.timestamp, new Date(args.timestamp)) : undefined
                     ) 
                 },
-                orderBy: orm.asc(phonebook.timestamp),
+                orderBy: orm.asc(schema.phonebook.timestamp),
                 offset: ((args?.pagination?.size ?? 0) * (args?.pagination?.page ?? 0)),
                 limit: args?.pagination?.size ?? 20
             })
@@ -70,7 +69,7 @@ export const hermesQueries: ResolverMap = {
                         }
                     }
                 },
-                orderBy: orm.desc(inbox.timestamp)
+                orderBy: orm.desc(schema.inbox.timestamp)
             })
 
             return inboxes ?? []

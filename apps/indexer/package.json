@@ -9,7 +9,9 @@
     "replicate": "ts-node --esm ./workers/replicator/main.ts",
     "ingress:dev": "ts-node --esm workers/replicator/ingress/index.ts",
     "ingress:test": "ts-node --esm workers/replicator/ingress/test.ts",
-    "all": "pnpm pull & pnpm replicate & pnpm ingress:dev"
+    "all": "pnpm pull & pnpm replicate & pnpm ingress:dev",
+    "build": "tsup",
+    "start": "node ./dist/workers/grpc-worker/main.js & node ./dist/workers/replicator/main.js & node ./dist/workers/replicator/ingress/index.js"
   },
   "keywords": [],
   "author": "",
@@ -18,10 +20,10 @@
     "@aptos-labs/aptos-protos": "1.1.2",
     "@grpc/grpc-js": "^1.10.6",
     "@kade-net/hermes-tunnel": "workspace:^",
+    "@kade-net/lama": "*",
     "@kade/posthog": "workspace:^",
     "db": "workspace:*",
     "dotenv": "^16.4.5",
-    "@kade-net/lama": "*",
     "lodash": "^4.17.21",
     "monitor": "workspace:^",
     "node-lmdb": "^0.10.0",
@@ -33,6 +35,7 @@
     "@types/lodash": "^4.17.0",
     "@types/node": "^20.12.7",
     "ts-node": "^10.9.2",
+    "tsup": "^8.0.2",
     "typescript": "^5.4.5"
   }
 }
