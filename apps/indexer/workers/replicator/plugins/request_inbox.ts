@@ -2,8 +2,8 @@ import { ProcessMonitor } from "monitor";
 import { EVENT_NAMES } from "../../../types";
 import { ProcessorPlugin } from "../plugin";
 import * as schema from 'zschema'
-import db, { orm } from "db";
-import { contact, delegate, inbox, phonebook } from "db/schema";
+import db, { orm, schema as dschema } from "db";
+const { contact, delegate, inbox, phonebook } = dschema
 import { randomUUID } from "crypto";
 
 export class RequestInboxRegisterEventProcessor extends ProcessorPlugin {

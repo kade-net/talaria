@@ -4,7 +4,8 @@ import { ProcessorPlugin } from "../plugin";
 import * as schema from 'zschema'
 import { getInbox } from "../../../utils";
 import db from "db";
-import { envelope } from "db/schema";
+import { schema as dschema } from "db";
+const { envelope } = dschema
 
 
 export class EnvelopeProcessor implements ProcessorPlugin {

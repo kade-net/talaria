@@ -10,8 +10,8 @@
     "ingress:dev": "ts-node --esm workers/replicator/ingress/index.ts",
     "ingress:test": "ts-node --esm workers/replicator/ingress/test.ts",
     "all": "pnpm pull & pnpm replicate & pnpm ingress:dev",
-    "build": "tsup",
-    "start": "node ./dist/workers/grpc-worker/main.js & node ./dist/workers/replicator/main.js & node ./dist/workers/replicator/ingress/index.js"
+    "build": "rm -rf dist && tsup",
+    "start": "node ./dist/workers/grpc-worker/main.js & node ./dist/workers/replicator/main.js & node ./dist/workers/ingress/index.js"
   },
   "keywords": [],
   "author": "",
