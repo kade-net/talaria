@@ -25,7 +25,7 @@ export const phonebookRelations = relations(phonebook, ({ many, one }) => {
 export const contact = pgTable("contact", {
     id: text("id").notNull().primaryKey(),
     address: text("address"),
-    user_address: text("user_address").notNull().references(() => phonebook.address),
+    user_address: text("user_address").notNull().references(() => phonebook.address, {onUpdate: 'cascade'}),
     accepted: boolean("accepted").notNull().default(false),
     timestamp: timestamp("timestamp").notNull(),
     envelope: json("envelope").notNull()
@@ -44,7 +44,7 @@ export const contactRelations = relations(contact, ({ many, one }) => {
 
 export const delegate = pgTable("delegate", {
     address: text("address").notNull().primaryKey(),
-    user_address: text("user_address").notNull().references(() => phonebook.address),
+    user_address: text("user_address").notNull().references(() => phonebook.address, {onUpdate: 'cascade'}),
     timestamp: timestamp("timestamp").notNull(),
     hid: text("hid").notNull(),
     public_key: text("public_key").notNull()
