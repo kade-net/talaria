@@ -8,6 +8,13 @@
       "when": 1714974075230,
       "tag": "0000_premium_the_order",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1719239610904,
+      "tag": "0001_classy_anthem",
+      "breakpoints": true
     }
   ]
 }
