@@ -38,7 +38,7 @@ describe('Message', () => {
         const encryptedMessage = aliceBranch.encrypt(message)
         const decryptedMessage = bobBranch.decrypt(encryptedMessage.message.ciphertext, encryptedMessage.header)
 
-        const deserializedMessage = Message.deserialize(decryptedMessage)
+        const deserializedMessage = Message.deserialize(decryptedMessage.plaintext)
 
         expect(deserializedMessage.content).to.equal('Hello World')
 

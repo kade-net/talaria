@@ -45,13 +45,13 @@ describe('Branch', () => {
         const encryptedMessage = aliceBranch.encrypt(message)
 
         const decryptedMessage = bobBranch.decrypt(encryptedMessage.message.ciphertext, encryptedMessage.header)
-        expect(decryptedMessage.toString()).to.equal('Hello World')
+        expect(decryptedMessage.plaintext.toString()).to.equal('Hello World')
 
         const bobsReply = Buffer.from('Hello Alice')
         const encryptedReply = bobBranch.encrypt(bobsReply)
 
         const decryptedReply = aliceBranch.decrypt(encryptedReply.message.ciphertext, encryptedReply.header)
-        expect(decryptedReply.toString()).to.equal('Hello Alice')
+        expect(decryptedReply.plaintext.toString()).to.equal('Hello Alice')
 
         const aliceReply1 = Buffer.from('Hello Bob')
         const encryptedReply1 = aliceBranch.encrypt(aliceReply1)
@@ -59,7 +59,7 @@ describe('Branch', () => {
         const encryptedReply2 = aliceBranch.encrypt(aliceReply2)
 
         const decryptedReply1 = bobBranch.decrypt(encryptedReply2.message.ciphertext, encryptedReply2.header)
-        expect(decryptedReply1.toString()).to.equal('Hello Bob')
+        expect(decryptedReply1.plaintext.toString()).to.equal('Hello Bob')
     })
 
     it('Serialize and Deserialize Branch', () => {
@@ -83,7 +83,7 @@ describe('Branch', () => {
         const encryptedMessage = aliceBranch.encrypt(message)
 
         const decryptedMessage = bobBranch.decrypt(encryptedMessage.message.ciphertext, encryptedMessage.header)
-        expect(decryptedMessage.toString()).to.equal('Hello World')
+        expect(decryptedMessage.plaintext.toString()).to.equal('Hello World')
 
         const serializedAliceBranch = aliceBranch.serialize()
         const serializedBobBranch = bobBranch.serialize()

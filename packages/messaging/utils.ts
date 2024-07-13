@@ -118,6 +118,11 @@ export interface Header {
     counter: number;         // Current sending chain message counter
 }
 
+export interface AttachmentHeader {
+    attachmentType: number;
+    attachmentLength: number;
+}
+
 // Function to generate a new header
 export function generateHeader(keypair: BoxKeyPair, previousCounter: number, counter: number): Header {
     return {
@@ -139,6 +144,24 @@ function AEAD_Encrypt(key: Buffer, plaintext: Buffer, associatedData: Buffer): {
     const tag = cipher.getAuthTag();
 
     return { ciphertext: Buffer.concat([iv, ciphertext, tag]) };
+}
+
+export function encrypt_attachment(attachment: Buffer, mk: Buffer, attachmentHeader: AttachmentHeader) {
+
+    const attachmentTypeBuffer = Buffer.alloc(4)
+    const attachmentLengthBuffer = Buffer.alloc(4)
+
+    attachmentTypeBuffer.writeUInt32BE(attachmentHeader.attachmentType, 0)
+    attachmentLengthBuffer.writeUInt32BE(attachmentHeader.attachmentLength, 0)
+
+    const associatedData = Buffer.concat([
+        attachmentTypeBuffer,
+        attachmentLengthBuffer
+    ])
+
+    const { ciphertext } = AEAD_Encrypt(mk, attachment, associatedData)
+
+    return { ciphertext }
 }
 
 // The main encrypt function
@@ -182,6 +205,23 @@ function AEAD_Decrypt(key: Buffer, encryptedMessage: Buffer, associatedData: Buf
     }
 }
 
+
+export function decrypt_attachment(attachment: Buffer, mk: Buffer, attachmentHeader: AttachmentHeader) {
+    const attachmentTypeBuffer = Buffer.alloc(4)
+    const attachmentLengthBuffer = Buffer.alloc(4)
+
+    attachmentTypeBuffer.writeUInt32BE(attachmentHeader.attachmentType, 0)
+    attachmentLengthBuffer.writeUInt32BE(attachmentHeader.attachmentLength, 0)
+
+    const associatedData = Buffer.concat([
+        attachmentTypeBuffer,
+        attachmentLengthBuffer
+    ])
+
+    const { plaintext, valid } = AEAD_Decrypt(mk, attachment, associatedData)
+
+    return { plaintext, valid }
+}
 
 // Function to parse the header
 function parseHeader(buffer: Buffer): Header {

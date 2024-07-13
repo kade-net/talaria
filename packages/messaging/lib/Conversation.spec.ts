@@ -35,14 +35,14 @@ describe('Conversation', () => {
         const decryptedMessage = bobsBranch.decrypt(bobsMessage.message.ciphertext, bobsMessage.header)
         const decryptedMessage2 = charliesBranch.decrypt(charliesMessage.message.ciphertext, charliesMessage.header)
         const decryptedMessage3 = daveBranch.decrypt(davesMessage.message.ciphertext, davesMessage.header)
-        expect(decryptedMessage.toString()).to.equal('Hello World')
+        expect(decryptedMessage.plaintext.toString()).to.equal('Hello World')
 
 
         const bobsReply = Buffer.from('Hello Alice')
         const encryptedReply = bobsBranch.encrypt(bobsReply)
         const decryptedReply = aliceConversation.decrypt(encryptedReply.message.ciphertext, encryptedReply.header, bob.bundle.identityKey)
 
-        expect(decryptedReply.toString()).to.equal('Hello Alice')
+        expect(decryptedReply.plaintext.toString()).to.equal('Hello Alice')
 
     })
 

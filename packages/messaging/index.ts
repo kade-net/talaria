@@ -3,6 +3,18 @@ import nacl, { BoxKeyPair } from 'tweetnacl'
 const { box } = nacl
 import { decrypt, DH, encrypt, generateHeader, getSkippedMessageKey, Header, headerToBuffer, KDF_CK, KDF_RK, STATE, uint8ArrayToHex } from './utils'
 
+export function get_encryption_key(state: STATE) {
+    const output = KDF_CK(Buffer.from(state.CKs!))
+    state.CKs = output.ckPrime
+    const header = generateHeader(state.DHs!, state.PN, state.Ns)
+
+    state.Ns++
+
+    return {
+        header,
+        mk: output.mk
+    }
+}
 
 export function ratchet_encrypt(state: STATE, plaintext: Buffer) {
     const output = KDF_CK(Buffer.from(state.CKs!))
@@ -17,12 +29,18 @@ export function ratchet_encrypt(state: STATE, plaintext: Buffer) {
     }
 }
 
-export function ratchet_decrypt(state: STATE, ciphertext: Buffer, header: Header): Buffer {
+export function ratchet_decrypt(state: STATE, ciphertext: Buffer, header: Header): {
+    plaintext: Buffer,
+    mk: Buffer
+} {
     const skippedMk = getSkippedMessageKey(state, header);
     if (skippedMk) {
         const { plaintext, valid } = decrypt(ciphertext, skippedMk, headerToBuffer(header));
         if (valid) {
-            return plaintext;
+            return {
+                plaintext,
+                mk: skippedMk
+            }
         } else {
             throw new Error("Decryption failed with skipped message key");
         }
@@ -67,5 +85,8 @@ export function ratchet_decrypt(state: STATE, ciphertext: Buffer, header: Header
         throw new Error("Decryption failed");
     }
 
-    return plaintext;
+    return {
+        plaintext,
+        mk
+    };
 }

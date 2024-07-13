@@ -1,7 +1,7 @@
 import nacl, { BoxKeyPair } from "tweetnacl";
 import { PreKeyBundle } from "./PreKeyBundle";
-import { DH, Header, KDF_RK } from "../utils";
-import { ratchet_decrypt, ratchet_encrypt } from "..";
+import { DH, encrypt, Header, KDF_RK } from "../utils";
+import { get_encryption_key, ratchet_decrypt, ratchet_encrypt } from "..";
 
 export interface STATE {
     /**
@@ -44,6 +44,8 @@ export interface STATE {
 }
 
 export class Branch {
+    currentHeader: Header | null = null
+    currentMessageKey: Uint8Array | null = null
     private sharedSecret: Uint8Array
     localBundle: PreKeyBundle
     remoteBundle: PreKeyBundle
@@ -98,9 +100,26 @@ export class Branch {
         }
     }
 
-    encrypt(message: Buffer) {
+    encrypt(message: Buffer, header?: Header, mk?: Buffer) {
+        if (header && mk) {
+            const encryptedMessage = encrypt(message, mk, header)
+
+            return {
+                header,
+                message: encryptedMessage,
+                mk
+            }
+        }
+
         const encrypted = ratchet_encrypt(this.conversationState, message)
         return encrypted
+    }
+
+    get_encryption_key() {
+        const keys = get_encryption_key(this.conversationState)
+        this.currentHeader = keys.header
+        this.currentMessageKey = keys.mk
+        return keys
     }
 
     decrypt(ciphertext: Buffer, header: Header) {
