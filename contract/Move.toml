@@ -1,0 +1,15 @@
+[package]
+name = "hermes"
+version = "1.0.0"
+authors = []
+
+[addresses]
+hermes="0x006a5a0f4277c08ee84004534dcc65ebc0970576f2333dcf62532b17f1eea80d"
+[dev-addresses]
+
+[dependencies.AptosFramework]
+git = "https://github.com/aptos-labs/aptos-core.git"
+rev = "mainnet"
+subdir = "aptos-move/framework/aptos-framework"
+
+[dev-dependencies]

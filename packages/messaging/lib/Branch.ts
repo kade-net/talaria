@@ -1,7 +1,7 @@
 import nacl, { BoxKeyPair } from "tweetnacl";
 import { PreKeyBundle } from "./PreKeyBundle";
 import { DH, encrypt, Header, KDF_RK } from "../utils";
-import { get_encryption_key, ratchet_decrypt, ratchet_encrypt } from "..";
+import { get_encryption_key, ratchet_decrypt, ratchet_encrypt } from ".";
 
 export interface STATE {
     /**

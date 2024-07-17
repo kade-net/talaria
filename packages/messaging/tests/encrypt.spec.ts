@@ -1,7 +1,7 @@
 import nacl from 'tweetnacl'
 const { box } = nacl
 import { DH, KDF_RK, STATE } from '../utils'
-import { ratchet_decrypt, ratchet_encrypt } from '..'
+import { ratchet_decrypt, ratchet_encrypt } from '../lib'
 import { printState } from './test-utils'
 
 const alice = box.keyPair()

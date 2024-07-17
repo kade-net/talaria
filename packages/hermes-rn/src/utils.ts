@@ -1,0 +1,1 @@
+import HermesRnModule from './HermesRnModule';

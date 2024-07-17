@@ -1,11 +1,16 @@
 {
-  "name": "messaging",
-  "version": "1.0.0",
+  "name": "@kade-net/messaging",
+  "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "type": "module",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "build": "rm -rf ./dist && tsup"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +22,7 @@
     "chai": "^5.1.1",
     "mocha": "^10.4.0",
     "ts-node": "^10.9.2",
+    "tsup": "^8.0.2",
     "typescript": "^5.4.5"
   },
   "dependencies": {

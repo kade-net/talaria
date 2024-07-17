@@ -22,6 +22,8 @@ describe('Encrypt and decrypt attachment', () => {
         const blob = fs.readFileSync('./lib/Attachments.test/image.jpg', {
         })
 
+        console.log("File Length ::", blob.length)
+
         const attachment = new Attachment(blob, AttachmentType.Image)
 
 
